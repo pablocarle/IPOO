@@ -398,10 +398,10 @@
 <XPD:OBJ name="OwnedViews[7]" type="UMLClassView" guid="CAhRvYGtO0WQ9/lwc91qswAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Left" type="integer">804</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">156</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">744</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">328</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">101</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">56</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">43</XPD:ATTR>
 <XPD:REF name="Model">6amw80gJq0mzsYVQAP8xgAAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="CvKXgVinB0C46+PnQaXxYwAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="X67zTFLkc0iPScOpdxT09wAA">
@@ -828,12 +828,6 @@
 <XPD:REF name="Views[1]">rUX2YrZ670m0iPcMeYFadwAA</XPD:REF>
 <XPD:REF name="Views[2]">813Hy248kEmjlkiyGAnT3gAA</XPD:REF>
 <XPD:REF name="Views[3]">H1WIXPwRYEeQNbPBg5ULqQAA</XPD:REF>
-<XPD:ATTR name="#Attributes" type="integer">1</XPD:ATTR>
-<XPD:OBJ name="Attributes[0]" type="UMLAttribute" guid="8ia1oTjYukKUHpxdNXwnrwAA">
-<XPD:ATTR name="Name" type="string">credito</XPD:ATTR>
-<XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkPrivate</XPD:ATTR>
-<XPD:REF name="Owner">6amw80gJq0mzsYVQAP8xgAAA</XPD:REF>
-</XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[8]" type="UMLClass" guid="Pvq+On8Vhkqq9erxossCuQAA">
 <XPD:ATTR name="Name" type="string">Sistema</XPD:ATTR>
