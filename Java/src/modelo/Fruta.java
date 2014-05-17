@@ -21,6 +21,20 @@ public class Fruta {
 		this.nombre = nombre;
 		this.urlImagen = urlImagen;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+//		Definir que 2 frutas son iguales cuando nombre y urlImagen son iguales
+		if (obj instanceof Fruta) {
+			Fruta fruta2 = (Fruta) obj;
+			
+			return (fruta2.getNombre().equalsIgnoreCase(this.getNombre()) && fruta2.getUrlImagen().equalsIgnoreCase(this.getUrlImagen()));
+			
+		}
+		
+//		Si no esta comparando con otra fruta, utilizar el comportamiento default de Object
+		return super.equals(obj);
+	}
 
 
 	/**

@@ -10,8 +10,7 @@ public class JugadaConPremio extends Jugada {
 
 	@Override
 	public boolean tienePremio() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

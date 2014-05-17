@@ -86,9 +86,7 @@ public class Sistema {
 //			TODO Devolver vista con error al usuario
 		} catch (Exception e) {
 //			Error no esperado
-		}
-		
-		
+		}	
 	}
 
 	/**

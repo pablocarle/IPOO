@@ -10,7 +10,6 @@ public class Tragamonedas {
 	private float recaudacionMin;
 	private float precioJugada;
 	private float credito;
-	
 
 	private List<Premio> premios;
 	private List<Casilla> casillas;
@@ -22,7 +21,9 @@ public class Tragamonedas {
 		this.credito = recaudacionInicial;
 		this.recaudacionMin = recaudacionMinima;
 		
+//		Crea un Vector reservando desde el inicio "cantCasillas" de espacios, de este modo se puede acceder a subindices aunque no esten cargados, evitando excepciones
 		casillas = new Vector<Casilla>(cantCasillas);
+		premios = new Vector<Premio>();
 		
 	}
 	
@@ -31,7 +32,24 @@ public class Tragamonedas {
 	}
 	
 	
+	/**
+	 * TODO Revisar retorno del metodo
+	 * 
+	 * @param combinacion
+	 * @param valorPremio
+	 */
 	public void altaPremio(List<Fruta> combinacion, float valorPremio) {
+		
+		premios.add(new Premio(combinacion, valorPremio));
+		
+	}
+	
+	/**
+	 * TODO Revisar retorno del metodo
+	 * 
+	 * @param combinacion
+	 */
+	public void bajaPremio(List<Fruta> combinacion) {
 		
 	}
 	
@@ -53,10 +71,31 @@ public class Tragamonedas {
 			
 		}
 		
-		return null;
+		if (this.esJugadaConPremio(combinacion))
+			return new JugadaConPremio(combinacion);
+		
+		return new JugadaSinPremio(combinacion);
 		
 	}
 	
+	private boolean esJugadaConPremio(List<Fruta> combinacion) {
+		
+		for (int i = 0; i < premios.size(); i++){
+			
+			Premio premio = premios.get(i);
+			
+			List<Fruta> combinacionAEvaluar = premio.getCombinacion();
+			
+			if (combinacion.equals(combinacionAEvaluar))
+				return true;
+			else
+				continue;
+			
+		}
+	
+		return false;
+	}
+
 	/*GETTERS Y SETTERS*/
 
 	/**
