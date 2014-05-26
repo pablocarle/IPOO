@@ -84,8 +84,6 @@ public class AltaTragamonedaForm extends JPanel {
 		});
 		btnCancelar.setBounds(242, 164, 117, 25);
 		add(btnCancelar);
-
-		setVisible(true);
 		
 	}
 }

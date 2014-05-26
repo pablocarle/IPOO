@@ -1,6 +1,5 @@
 package vista.config;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +17,10 @@ public class ConfigMain extends JFrame {
 
 	private JPanel configFormPanel;
 
-
+	private JPanel altaTragamonedas;
+	private JPanel altaPremio;
+	private JPanel bajaPremio;
+	private JPanel cargaCredito;
 	
 	public ConfigMain() {
 		setTitle("Tragamonedas V1.0 - Configuracion");
@@ -26,6 +28,7 @@ public class ConfigMain extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		setResizable(false);
+		setBounds(0, 0, 1280, 1024);
 		
 		JButton btnAltaTragamonedas = new JButton("Alta Tragamonedas");
 		btnAltaTragamonedas.setBounds(12, 12, 187, 25);
@@ -34,11 +37,11 @@ public class ConfigMain extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// Mostrar formulario de alta de tragamonedas
-				JPanel formAlta = new AltaTragamonedaForm();
-//				configFormPanel.removeAll();
-				formAlta.setBounds(12, 86, 461, 172);
-				configFormPanel.add(formAlta);
-				configFormPanel.repaint();
+				configFormPanel = new AltaTragamonedaForm();
+				configFormPanel.setBounds(12, 86, 461, 172);
+				
+				getContentPane().add(configFormPanel);
+				configFormPanel.setVisible(true);
 				repaint();
 			}
 		});
@@ -66,11 +69,11 @@ public class ConfigMain extends JFrame {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(22, 86, 451, 4);
 		getContentPane().add(separator);
-		
-		configFormPanel = new JPanel();
-		configFormPanel.setBounds(12, 86, 461, 172);
-		configFormPanel.setBackground(Color.BLUE);
-		getContentPane().add(configFormPanel);
+//		
+//		configFormPanel = new JPanel();
+//		configFormPanel.setBounds(12, 86, 461, 172);
+//		configFormPanel.setBackground(Color.BLUE);
+//		getContentPane().add(configFormPanel);
 
 	}
 	
