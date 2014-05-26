@@ -3,10 +3,13 @@ package controlador;
 import java.util.List;
 import java.util.Vector;
 
+import vista.UserMessageView;
+import vista.TragamonedasView;
 import modelo.Fruta;
 import modelo.Jugada;
 import modelo.Tragamonedas;
 import controlador.exceptions.MaquinaNoEncontradaException;
+import controlador.exceptions.TragamonedasCreacionException;
 
 public class Sistema {
 	
@@ -39,31 +42,32 @@ public class Sistema {
 	 * @param recaudacionMinima
 	 * @param cantCasillas
 	 */
-	public void crearTragamonedas(float precioJugada, float recaudacionInicial, float recaudacionMinima, int cantCasillas) {
-//		TODO Corregir constructor
-		tragamonedas.add(new Tragamonedas(precioJugada, recaudacionInicial, recaudacionMinima, cantCasillas));
-			
+	public TragamonedasView crearTragamonedas(float precioJugada, float recaudacionInicial, float recaudacionMinima, int cantCasillas) throws TragamonedasCreacionException {
+		
+		Tragamonedas tragamonedasNuevo = new Tragamonedas(tragamonedas.size() + 1, precioJugada, recaudacionInicial, recaudacionMinima, cantCasillas);
+		tragamonedas.add(tragamonedasNuevo);
+		return tragamonedasNuevo.getView();
+	
 	}
 	
 	
 	/**
 	 * TODO Esto deberia devolver una vista
 	 */
-	public void altaPremio(int nroMaquina, List<Fruta> combinacionPremio, float valorPremio) {
+	public UserMessageView altaPremio(int nroMaquina, List<Fruta> combinacionPremio, float valorPremio) {
 		
 		try {
 			
 			Tragamonedas maquina = this.buscarTragamonedas(nroMaquina);
 			
-//			TODO agregarPremio aun no implementado
 			maquina.altaPremio(combinacionPremio, valorPremio);
 			
 		} catch (MaquinaNoEncontradaException e) {
-			
-		} catch (Exception e) {
-//			Error no esperado
-		}
-		
+//			FIXME
+			return null;
+		} 
+//		FIXME
+		return null;
 	}
 	
 	/**

@@ -3,6 +3,9 @@ package modelo;
 import java.util.List;
 import java.util.Vector;
 
+import vista.TragamonedasView;
+import controlador.exceptions.TragamonedasCreacionException;
+
 public class Tragamonedas {
 
 	private int codigoTragamoneda;
@@ -15,8 +18,12 @@ public class Tragamonedas {
 	private List<Casilla> casillas;
 	
 	
-	public Tragamonedas(float precioJugada, float recaudacionInicial, float recaudacionMinima, int cantCasillas) {
+	public Tragamonedas(int codigoTragamoneda, float precioJugada, float recaudacionInicial, float recaudacionMinima, int cantCasillas) throws TragamonedasCreacionException {
 		
+		if (precioJugada < 0 || cantCasillas <= 0 || recaudacionMinima > recaudacionInicial)
+			throw new TragamonedasCreacionException();
+		
+		this.codigoTragamoneda = codigoTragamoneda;
 		this.precioJugada = precioJugada;
 		this.credito = recaudacionInicial;
 		this.recaudacionMin = recaudacionMinima;
@@ -37,10 +44,15 @@ public class Tragamonedas {
 	 * 
 	 * @param combinacion
 	 * @param valorPremio
+	 * @return 
 	 */
-	public void altaPremio(List<Fruta> combinacion, float valorPremio) {
+	public boolean altaPremio(List<Fruta> combinacion, float valorPremio) {
+
+//		Verificar el valor del premio y la cantidad de casillas
 		
 		premios.add(new Premio(combinacion, valorPremio));
+		
+		return true;
 		
 	}
 	
@@ -51,6 +63,11 @@ public class Tragamonedas {
 	 */
 	public void bajaPremio(List<Fruta> combinacion) {
 		
+	}
+	
+	public TragamonedasView getView() {
+//		TODO
+		return null;
 	}
 	
 	
