@@ -16,11 +16,11 @@ public class Sistema {
 	public Sistema() {
 	
 		frutasDisponibles = new Vector<Fruta>();
-		frutasDisponibles.add(new Fruta("Frutilla", "frutilla.png"));
-		frutasDisponibles.add(new Fruta("Sandia", "sandia.png"));
-		frutasDisponibles.add(new Fruta("Banana", "banana.png"));
-		frutasDisponibles.add(new Fruta("Manzana", "manzana.png"));
-		frutasDisponibles.add(new Fruta("Pera", "pera.png"));
+		frutasDisponibles.add(new Fruta("Frutilla", "frutilla.jpg"));
+		frutasDisponibles.add(new Fruta("Sandia", "sandia.jpg"));
+		frutasDisponibles.add(new Fruta("Banana", "banana.jpg"));
+		frutasDisponibles.add(new Fruta("Manzana", "manzana.jpg"));
+		frutasDisponibles.add(new Fruta("Pera", "pera.jpg"));
 		
 		tragamonedas = new Vector<Tragamonedas>();
 	}
