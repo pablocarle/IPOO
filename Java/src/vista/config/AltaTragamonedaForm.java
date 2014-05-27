@@ -1,5 +1,9 @@
 package vista.config;
 
+import controlador.Sistema; 
+import controlador.exceptions.MaquinaNoEncontradaException;
+import controlador.exceptions.TragamonedasCreacionException;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,7 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import modelo.Tragamonedas;
+
 import vista.MainFrame;
+import vista.TragamonedasView;
 
 public class AltaTragamonedaForm extends JPanel {
 	/**
@@ -23,11 +30,14 @@ public class AltaTragamonedaForm extends JPanel {
 	private JTextField cantCasillasText;
 	private JButton btnAceptar;
 	private JButton btnCancelar;
+	private Sistema sistema;
 
 	/**
 	 * Create the panel.
 	 */
-	public AltaTragamonedaForm() {
+	public AltaTragamonedaForm(Sistema s) {
+		
+		sistema = s;
 		setLayout(null);
 		
 		JLabel lblPrecioDeJugada = new JLabel("Precio de Jugada");
@@ -68,7 +78,29 @@ public class AltaTragamonedaForm extends JPanel {
 		cantCasillasText.setColumns(10);
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(97, 164, 117, 25);
+		btnAceptar.addActionListener(new ActionListener() {
+			
+
+			public void actionPerformed(ActionEvent arg0) {
+				//llama a modelo para crear tragamonedas
+				try
+				{
+				
+				sistema.crearTragamonedas(Float.parseFloat(precioJugadaText.getText()), Float.parseFloat(recaudacionIniText.getText()), Float.parseFloat(recaudacionMinText.getText()), Integer.parseInt(cantCasillasText.getText()) );
+				} catch (TragamonedasCreacionException e) {			
+
+					e.printStackTrace();
+					//USAR DESPUES PARA MOSTRAR MENSAJES DE ERROR 
+					//new UserMessageView(e.getMessage());
+				}
+				precioJugadaText.setText("");
+				recaudacionIniText.setText("");
+				recaudacionMinText.setText("");
+				cantCasillasText.setText("");			
+						
+			}
+		});
+		btnAceptar.setBounds(97, 150, 117, 25);
 		add(btnAceptar);
 		
 		btnCancelar = new JButton("Cancelar");
@@ -82,7 +114,7 @@ public class AltaTragamonedaForm extends JPanel {
 				mainPage.setVisible(true);
 			}
 		});
-		btnCancelar.setBounds(242, 164, 117, 25);
+		btnCancelar.setBounds(242, 150, 117, 25);
 		add(btnCancelar);
 		
 	}

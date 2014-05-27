@@ -1,5 +1,7 @@
 package vista;
 
+import controlador.Sistema;
+
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +23,7 @@ public class MainFrame extends JFrame {
 	private JLabel lblTragamonedasV;
 	private JButton btnConfiguracion;
 	private JButton btnJugar;
+	private Sistema sistema;
 
 	public static void main(String[] args) {
 		
@@ -47,6 +50,7 @@ public class MainFrame extends JFrame {
 		setTitle("Tragamonedas V1.0");
 		
 		initGUI();
+		sistema = new Sistema();
 		
 		initEvents();
 
@@ -74,7 +78,7 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 //				Abrir ventana de configuracion
-				JFrame configMain = new ConfigMain();
+				JFrame configMain = new ConfigMain(sistema);
 				configMain.setVisible(true);
 				setVisible(false);
 //				setEnabled(false);				

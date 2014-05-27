@@ -1,5 +1,8 @@
 package vista.config;
 
+import controlador.Sistema;
+
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,8 +24,11 @@ public class ConfigMain extends JFrame {
 	private JPanel altaPremio;
 	private JPanel bajaPremio;
 	private JPanel cargaCredito;
+	private Sistema sistema;
 	
-	public ConfigMain() {
+	public ConfigMain(Sistema s) {
+
+		sistema = s;				
 		setTitle("Tragamonedas V1.0 - Configuracion");
 		setBounds(100, 100, 487, 309);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,8 +43,8 @@ public class ConfigMain extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// Mostrar formulario de alta de tragamonedas
-				configFormPanel = new AltaTragamonedaForm();
-				configFormPanel.setBounds(12, 86, 461, 172);
+				configFormPanel = new AltaTragamonedaForm(sistema);
+				configFormPanel.setBounds(12, 110, 761, 222);
 				
 				getContentPane().add(configFormPanel);
 				configFormPanel.setVisible(true);
@@ -52,7 +58,12 @@ public class ConfigMain extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				// Mostrar formulario de alta de tragamonedas
+				AltaPremioForm a = new AltaPremioForm(sistema);
+	//*			a.setBounds(12, 86, 461, 172);
+	//*			getContentPane().add(a);
+				a.setVisible(true);
+	//*			repaint();
 			}
 		});
 		btnAltaPremio.setBounds(12, 49, 187, 25);

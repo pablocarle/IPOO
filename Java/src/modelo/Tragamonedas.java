@@ -16,12 +16,23 @@ public class Tragamonedas {
 
 	private List<Premio> premios;
 	private List<Casilla> casillas;
+	private List<Jugada> jugadas;
 	
 	
 	public Tragamonedas(int codigoTragamoneda, float precioJugada, float recaudacionInicial, float recaudacionMinima, int cantCasillas) throws TragamonedasCreacionException {
 		
-		if (precioJugada < 0 || cantCasillas <= 0 || recaudacionMinima > recaudacionInicial)
-			throw new TragamonedasCreacionException();
+		//-------------------------------------------------------------
+		// Validaciones en el alta de tragamonedas y mostrar excepciones
+		//-------------------------------------------------------------
+		if (precioJugada <= 0 )
+		{
+			throw new TragamonedasCreacionException("El precio de jugada debe ser mayor que 0.");
+		}else if ( cantCasillas <= 0){
+			      throw new TragamonedasCreacionException("La cantidad de casillas debe ser mayor que 0.");
+		       }else if( recaudacionMinima > recaudacionInicial){
+				        throw new TragamonedasCreacionException("La recaudación mínima debe ser mayor que la recaudación inicial.");							        
+		             }   
+		//-------------------------------------------------------------
 		
 		this.codigoTragamoneda = codigoTragamoneda;
 		this.precioJugada = precioJugada;
@@ -29,8 +40,9 @@ public class Tragamonedas {
 		this.recaudacionMin = recaudacionMinima;
 		
 //		Crea un Vector reservando desde el inicio "cantCasillas" de espacios, de este modo se puede acceder a subindices aunque no esten cargados, evitando excepciones
-		casillas = new Vector<Casilla>(cantCasillas);
-		premios = new Vector<Premio>();
+		this.casillas = new Vector<Casilla>(cantCasillas);
+		this.premios = new Vector<Premio>();
+		this.jugadas = new Vector<Jugada>();
 		
 	}
 	
@@ -64,12 +76,13 @@ public class Tragamonedas {
 	public void bajaPremio(List<Fruta> combinacion) {
 		
 	}
-	
+     
+	//View de tragamonedas 
 	public TragamonedasView getView() {
-//		TODO
-		return null;
+		TragamonedasView tragamonedas =new TragamonedasView(codigoTragamoneda, recaudacion, recaudacionMin, precioJugada, credito, premios, casillas, jugadas );
+		
+		return tragamonedas;
 	}
-	
 	
 	/**
 	 * TODO 
@@ -162,5 +175,25 @@ public class Tragamonedas {
 	 */
 	public List<Casilla> getCasillas() {
 		return casillas;
+	}
+	public boolean buscarCombinacion(List<Fruta> combinacion){
+		
+		for (int i=0;i<premios.size();i++){
+			if (premios.get(i).getCombinacion().equals(combinacion)){
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean crearPremio(List<Fruta> combinacion, float valorPremio) {
+
+		if (buscarCombinacion(combinacion)){
+			return false; 
+		}
+		
+		premios.add(new Premio(combinacion, valorPremio));
+		
+		return true;
+		
 	}
 }

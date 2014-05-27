@@ -1,14 +1,19 @@
 package controlador;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+//import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 import vista.UserMessageView;
 import vista.TragamonedasView;
 import modelo.Fruta;
 import modelo.Jugada;
 import modelo.Tragamonedas;
 import controlador.exceptions.MaquinaNoEncontradaException;
+import controlador.exceptions.PremioException;
+import controlador.exceptions.PremioNoEncontradoException;
 import controlador.exceptions.TragamonedasCreacionException;
 
 public class Sistema {
@@ -54,18 +59,37 @@ public class Sistema {
 	/**
 	 * TODO Esto deberia devolver una vista
 	 */
-	public UserMessageView altaPremio(int nroMaquina, List<Fruta> combinacionPremio, float valorPremio) {
+	public UserMessageView altaPremio(int nroMaquina, List<String> combinacionInput, float valorPremio) {
 		
 		try {
+			 List<Fruta> combinacionPremio = new Vector<Fruta>();
+			
+			for (int i=0;i<combinacionInput.size();i++){
+				Fruta comb = new Fruta(combinacionInput.get(i)," ");
+				combinacionPremio.add(comb);
+			}
 			
 			Tragamonedas maquina = this.buscarTragamonedas(nroMaquina);
 			
-			maquina.altaPremio(combinacionPremio, valorPremio);
-			
+			if (maquina != null){
+			   
+			   if (valorPremio < 0 ){
+				   throw new PremioException("Importe de premio debe ser mayor a 0");
+			   }
+				   if (!maquina.crearPremio(combinacionPremio, valorPremio)){
+				   throw new PremioNoEncontradoException("La combinacion ingresada ya Existe");
+			   }
+			   
+			}
+				
 		} catch (MaquinaNoEncontradaException e) {
 //			FIXME
+			return null;	
+		} catch (PremioException e){
 			return null;
-		} 
+		} catch (PremioNoEncontradoException e){
+			return null;
+		}
 //		FIXME
 		return null;
 	}
@@ -100,7 +124,7 @@ public class Sistema {
 	 * @return Instancia de tragamonedas
 	 * @throws MaquinaNoEncontradaException Si no se encontro la maquina
 	 */
-	private Tragamonedas buscarTragamonedas(int nroMaquina) throws MaquinaNoEncontradaException {
+	public Tragamonedas buscarTragamonedas(int nroMaquina) throws MaquinaNoEncontradaException {
 		
 		for (int i = 0; i < tragamonedas.size(); i++) {
 			if (tragamonedas.get(i).getCodigoTragamoneda() == nroMaquina)
