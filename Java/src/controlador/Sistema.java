@@ -131,4 +131,10 @@ public class Sistema {
 		
 		throw new MaquinaNoEncontradaException("No se encontro el tragamonedas solicitado");
 	}
+
+	public UserMessageView bajaPremio(int nroMaquina,
+			List<String> combinacionPremio) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

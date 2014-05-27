@@ -80,8 +80,7 @@ public class MainFrame extends JFrame {
 //				Abrir ventana de configuracion
 				JFrame configMain = new ConfigMain(sistema);
 				configMain.setVisible(true);
-				setVisible(false);
-//				setEnabled(false);				
+				dispose();
 			}
 		});
 		
@@ -92,7 +91,7 @@ public class MainFrame extends JFrame {
 //				Abrir ventana de juego
 				JFrame juegoMain = new JuegoMain();
 				juegoMain.setVisible(true);
-				
+				dispose();
 			}
 		});
 	}

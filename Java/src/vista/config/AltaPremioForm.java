@@ -1,5 +1,6 @@
 package vista.config;
 
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -119,7 +120,8 @@ public class AltaPremioForm extends JPanel {
 
 			public void actionPerformed(ActionEvent arg0) {
 //				Cerrar la ventana y volver al menu principal
-				getParent().setVisible(false);
+				JFrame configFrame = (JFrame)getParent().getParent().getParent().getParent();
+				configFrame.dispose();
 				JFrame mainPage = new MainFrame();
 				mainPage.setVisible(true);
 			}

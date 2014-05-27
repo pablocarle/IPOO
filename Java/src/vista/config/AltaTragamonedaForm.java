@@ -126,7 +126,8 @@ public class AltaTragamonedaForm extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 //				Cerrar la ventana y volver al menu principal
-				getParent().getParent().setVisible(false);
+				JFrame configFrame = (JFrame)getParent().getParent().getParent().getParent();
+				configFrame.dispose();
 				JFrame mainPage = new MainFrame();
 				mainPage.setVisible(true);
 			}
