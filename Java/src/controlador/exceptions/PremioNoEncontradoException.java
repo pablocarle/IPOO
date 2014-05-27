@@ -25,11 +25,4 @@ public class PremioNoEncontradoException extends TragamonedasException {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
-
-	public PremioNoEncontradoException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-		// TODO Auto-generated constructor stub
-	}
-
 }

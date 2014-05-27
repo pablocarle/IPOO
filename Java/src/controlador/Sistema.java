@@ -1,16 +1,14 @@
 package controlador;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-//import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
-import vista.UserMessageView;
-import vista.TragamonedasView;
 import modelo.Fruta;
 import modelo.Jugada;
 import modelo.Tragamonedas;
+import vista.TragamonedasView;
+//import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
+import vista.UserMessageView;
 import controlador.exceptions.MaquinaNoEncontradaException;
 import controlador.exceptions.PremioException;
 import controlador.exceptions.PremioNoEncontradoException;

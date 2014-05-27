@@ -1,22 +1,19 @@
 package vista.config;
 
-import controlador.Sistema; 
-import controlador.exceptions.MaquinaNoEncontradaException;
-import controlador.exceptions.TragamonedasCreacionException;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import modelo.Tragamonedas;
-
 import vista.MainFrame;
 import vista.TragamonedasView;
+import controlador.Sistema;
+import controlador.exceptions.TragamonedasCreacionException;
 
 public class AltaTragamonedaForm extends JPanel {
 	/**
@@ -28,6 +25,12 @@ public class AltaTragamonedaForm extends JPanel {
 	private JTextField recaudacionIniText;
 	private JTextField recaudacionMinText;
 	private JTextField cantCasillasText;
+	
+	private JLabel lblPrecioDeJugada;
+	private JLabel lblRecaudacionInicial;
+	private JLabel lblRecaudacionMinima;
+	private JLabel lblCantidadDeCasillas;
+	
 	private JButton btnAceptar;
 	private JButton btnCancelar;
 	private Sistema sistema;
@@ -35,27 +38,35 @@ public class AltaTragamonedaForm extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AltaTragamonedaForm(Sistema s) {
+	public AltaTragamonedaForm(final Sistema sistema) {
 		
-		sistema = s;
+		this.sistema = sistema;
 		setLayout(null);
 		
-		JLabel lblPrecioDeJugada = new JLabel("Precio de Jugada");
+		initGUI();
+		initEvents();
+		
+	}
+	
+	private void initGUI() {
+//		Labels
+		lblPrecioDeJugada = new JLabel("Precio de Jugada");
 		lblPrecioDeJugada.setBounds(12, 30, 202, 15);
 		add(lblPrecioDeJugada);
 		
-		JLabel lblRecaudacionInicial = new JLabel("Recaudacion Inicial");
+		lblRecaudacionInicial = new JLabel("Recaudacion Inicial");
 		lblRecaudacionInicial.setBounds(12, 57, 135, 15);
 		add(lblRecaudacionInicial);
 		
-		JLabel lblRecaudacionMinima = new JLabel("Recaudacion Minima");
+		lblRecaudacionMinima = new JLabel("Recaudacion Minima");
 		lblRecaudacionMinima.setBounds(12, 84, 144, 15);
 		add(lblRecaudacionMinima);
 		
-		JLabel lblCantidadDeCasillas = new JLabel("Cantidad de casillas");
+		lblCantidadDeCasillas = new JLabel("Cantidad de casillas");
 		lblCantidadDeCasillas.setBounds(12, 111, 144, 15);
 		add(lblCantidadDeCasillas);
 		
+//		Campos de texto
 		precioJugadaText = new JTextField();
 		precioJugadaText.setBounds(324, 28, 114, 19);
 		add(precioJugadaText);
@@ -77,45 +88,55 @@ public class AltaTragamonedaForm extends JPanel {
 		add(cantCasillasText);
 		cantCasillasText.setColumns(10);
 		
+//		Botones
 		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(97, 150, 117, 25);
+		add(btnAceptar);
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(242, 150, 117, 25);
+		add(btnCancelar);
+	}
+	
+	private void initEvents() {
+//		Aceptar intenta crear un nuevo tragamonedas
 		btnAceptar.addActionListener(new ActionListener() {
 			
-
 			public void actionPerformed(ActionEvent arg0) {
 				//llama a modelo para crear tragamonedas
-				try
-				{
+				TragamonedasView vistaRetorno;
 				
-				sistema.crearTragamonedas(Float.parseFloat(precioJugadaText.getText()), Float.parseFloat(recaudacionIniText.getText()), Float.parseFloat(recaudacionMinText.getText()), Integer.parseInt(cantCasillasText.getText()) );
+				try	{
+				
+					vistaRetorno = sistema.crearTragamonedas(Float.parseFloat(precioJugadaText.getText()), Float.parseFloat(recaudacionIniText.getText()), Float.parseFloat(recaudacionMinText.getText()), Integer.parseInt(cantCasillasText.getText()) );
+					JOptionPane.showMessageDialog(null, "Se genero correctamente el tragamonedas con codigo: " + vistaRetorno.getCodigoTragamoneda());
+					
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(null, "Formato de numero incorrecto, verifique los datos ingresados");
 				} catch (TragamonedasCreacionException e) {			
-
-					e.printStackTrace();
-					//USAR DESPUES PARA MOSTRAR MENSAJES DE ERROR 
-					//new UserMessageView(e.getMessage());
+					JOptionPane.showMessageDialog(null, "Ocurrio un error de creacion de tragamonedas, revise los datos ingresados");
 				}
-				precioJugadaText.setText("");
-				recaudacionIniText.setText("");
-				recaudacionMinText.setText("");
-				cantCasillasText.setText("");			
+				limpiarCampos();		
 						
 			}
 		});
-		btnAceptar.setBounds(97, 150, 117, 25);
-		add(btnAceptar);
 		
-		btnCancelar = new JButton("Cancelar");
+		
 		btnCancelar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 //				Cerrar la ventana y volver al menu principal
-				getParent().setVisible(false);
+				getParent().getParent().setVisible(false);
 				JFrame mainPage = new MainFrame();
 				mainPage.setVisible(true);
 			}
 		});
-		btnCancelar.setBounds(242, 150, 117, 25);
-		add(btnCancelar);
-		
+	}
+	
+	private void limpiarCampos() {
+		precioJugadaText.setText("");
+		recaudacionIniText.setText("");
+		recaudacionMinText.setText("");
+		cantCasillasText.setText("");	
 	}
 }
