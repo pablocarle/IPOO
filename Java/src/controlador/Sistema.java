@@ -58,38 +58,32 @@ public class Sistema {
 	 * TODO Esto deberia devolver una vista
 	 */
 	public UserMessageView altaPremio(int nroMaquina, List<String> combinacionInput, float valorPremio) {
+		    UserMessageView mensaje;
 		
-		try {
-			 List<Fruta> combinacionPremio = new Vector<Fruta>();
+			List<Fruta> combinacionPremio = new Vector<Fruta>();
 			
 			for (int i=0;i<combinacionInput.size();i++){
 				Fruta comb = new Fruta(combinacionInput.get(i)," ");
 				combinacionPremio.add(comb);
 			}
-			
+			try {
 			Tragamonedas maquina = this.buscarTragamonedas(nroMaquina);
 			
 			if (maquina != null){
 			   
-			   if (valorPremio < 0 ){
-				   throw new PremioException("Importe de premio debe ser mayor a 0");
-			   }
+			   if (valorPremio <= 0 ){
+				   return mensaje = new UserMessageView("Importe de premio debe ser mayor a 0");
+			   }else{ 
 				   if (!maquina.crearPremio(combinacionPremio, valorPremio)){
-				   throw new PremioNoEncontradoException("La combinacion ingresada ya Existe");
-			   }
-			   
+					   return mensaje = new UserMessageView("La combinacion ingresada ya Existe");
+				   }
+			   } 
 			}
-				
-		} catch (MaquinaNoEncontradaException e) {
-//			FIXME
-			return null;	
-		} catch (PremioException e){
-			return null;
-		} catch (PremioNoEncontradoException e){
-			return null;
-		}
-//		FIXME
-		return null;
+	
+			return mensaje = new UserMessageView("Alta Exitosa");
+			} catch (MaquinaNoEncontradaException e) {
+ 				return mensaje = new UserMessageView("Maquina No Encontrada");
+			}
 	}
 	
 	/**
