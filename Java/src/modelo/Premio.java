@@ -3,7 +3,7 @@ package modelo;
 import java.util.List;
 
 public class Premio {
-	
+
 	private float valorPremio;
 	private List<Fruta> combinacion;
 

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import vista.config.ConfigMain;
 import vista.juego.JuegoMain;
@@ -105,7 +106,9 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 //				Cerrar sistema
-				System.exit(0);
+				int seguro =JOptionPane.showConfirmDialog(null, "Seguro que desea salir?"); 
+				if (seguro == 0)
+					System.exit(0);
 			}
 		});
 	}

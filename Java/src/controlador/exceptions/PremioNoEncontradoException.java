@@ -1,6 +1,6 @@
 package controlador.exceptions;
 
-public class PremioNoEncontradoException extends TragamonedasException {
+public class PremioNoEncontradoException extends PremioException {
 
 	/**
 	 * 

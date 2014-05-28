@@ -1,5 +1,6 @@
 package controlador;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -9,7 +10,10 @@ import modelo.Tragamonedas;
 import vista.TragamonedasView;
 //import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 import vista.UserMessageView;
+import controlador.exceptions.CombinacionExistenteException;
 import controlador.exceptions.MaquinaNoEncontradaException;
+import controlador.exceptions.PremioException;
+import controlador.exceptions.PremioNoEncontradoException;
 import controlador.exceptions.TragamonedasCreacionException;
 
 public class Sistema {
@@ -47,6 +51,9 @@ public class Sistema {
 
 		Tragamonedas tragamonedasNuevo = new Tragamonedas(tragamonedas.size() + 1, precioJugada, recaudacionInicial, recaudacionMinima, cantCasillas);
 		tragamonedas.add(tragamonedasNuevo);
+		for (int i = 0; i < cantCasillas; i++) {
+			tragamonedasNuevo.agregarCasilla(i, frutasDisponibles);
+		}
 		return tragamonedasNuevo.getView();
 
 	}
@@ -54,34 +61,34 @@ public class Sistema {
 
 	/**
 	 * TODO Esto deberia devolver una vista
+	 * @throws  
 	 */
 	public UserMessageView altaPremio(int nroMaquina, List<String> combinacionInput, float valorPremio) {
-		UserMessageView mensaje;
 
 		List<Fruta> combinacionPremio = new Vector<Fruta>();
 
-		for (int i=0;i<combinacionInput.size();i++){
-			Fruta comb = new Fruta(combinacionInput.get(i)," ");
-			combinacionPremio.add(comb);
-		}
+		//		Genera la combinacion del premio con la coleccion de Strings
+		combinacionPremio = this.generarCombinacion(combinacionInput);
 		try {
 			Tragamonedas maquina = this.buscarTragamonedas(nroMaquina);
 
 			if (maquina != null){
-
-				if (valorPremio <= 0 ){
-					return mensaje = new UserMessageView("Importe de premio debe ser mayor a 0");
-				}else{ 
-					if (!maquina.crearPremio(combinacionPremio, valorPremio)){
-						return mensaje = new UserMessageView("La combinacion ingresada ya Existe");
-					}
-				} 
+				if (valorPremio <= 0){
+					return new UserMessageView("Importe de premio debe ser mayor a 0");
+				}else {
+					maquina.crearPremio(combinacionPremio, valorPremio);
+				}
 			}
-
-			return mensaje = new UserMessageView("Alta Exitosa");
 		} catch (MaquinaNoEncontradaException e) {
-			return mensaje = new UserMessageView("Maquina No Encontrada");
+			return new UserMessageView("Maquina No Encontrada");		
+		} catch (PremioException e) {
+			if (e instanceof CombinacionExistenteException)
+				return new UserMessageView("La combinacion ingresada ya Existe");
+			else
+				return new UserMessageView("Cantidad de frutas excede el limite de la maquina");
 		}
+		
+		return new UserMessageView("Premio creado exitosamente");
 	}
 
 	/**
@@ -114,7 +121,7 @@ public class Sistema {
 	 * @return Instancia de tragamonedas
 	 * @throws MaquinaNoEncontradaException Si no se encontro la maquina
 	 */
-	public Tragamonedas buscarTragamonedas(int nroMaquina) throws MaquinaNoEncontradaException {
+	private Tragamonedas buscarTragamonedas(int nroMaquina) throws MaquinaNoEncontradaException {
 
 		for (int i = 0; i < tragamonedas.size(); i++) {
 			if (tragamonedas.get(i).getCodigoTragamoneda() == nroMaquina)
@@ -124,14 +131,26 @@ public class Sistema {
 		throw new MaquinaNoEncontradaException("No se encontro el tragamonedas solicitado");
 	}
 
-	public UserMessageView bajaPremio(int nroMaquina,
-			List<String> combinacionPremio) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserMessageView bajaPremio(int nroMaquina, List<String> combinacionPremioAEliminar) {
+		
+		UserMessageView mensajeRetorno = new UserMessageView("Premio dado de baja correctamente");
+		
+		try {
+			Tragamonedas maquina = this.buscarTragamonedas(nroMaquina);
+			maquina.bajaPremio(this.generarCombinacion(combinacionPremioAEliminar));
+			
+		} catch (MaquinaNoEncontradaException e) {
+			mensajeRetorno.setMensaje("No se encontro la maquina solicitada");
+		} catch (PremioException e) {
+			if (e instanceof PremioNoEncontradoException)
+				mensajeRetorno.setMensaje("No existe el premio solicitado");
+		}
+		
+		return mensajeRetorno;
 	}
 
 	public UserMessageView cargarCredito(Integer nbrMaquina, Float creditoAdicional) {
-		
+
 		try {
 			Tragamonedas maquina = this.buscarTragamonedas(nbrMaquina);
 			maquina.incrementarCredito(creditoAdicional);
@@ -139,5 +158,33 @@ public class Sistema {
 		} catch (MaquinaNoEncontradaException e) {
 			return new UserMessageView("No se encontro la maquina solicitada");
 		}
+	}
+	
+	/**
+	 * Convertir lista 
+	 * 
+	 * @param frutas
+	 * @return
+	 */
+	private List<Fruta> generarCombinacion(List<String> frutas) {
+		
+		List<Fruta> listaRetorno = new ArrayList<Fruta>();
+		for (int i=0; i<frutas.size(); i++){
+			Fruta comb = buscarFruta(frutas.get(i));
+			listaRetorno.add(comb);
+		}
+		
+		return listaRetorno;
+	}
+
+	private Fruta buscarFruta(String nombreFruta) {
+		for (Fruta fruta : frutasDisponibles) {
+			
+			if (fruta.getNombre().equalsIgnoreCase(nombreFruta))
+				return fruta;
+			else
+				continue;
+		}
+		return null;
 	}
 }

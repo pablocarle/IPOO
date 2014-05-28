@@ -138,6 +138,7 @@ public class BajaPremioForm extends JPanel {
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(null, "Ocurrio un error al dar de alta el premio, revise los datos", "Error", JOptionPane.ERROR_MESSAGE);
 				}
+				limpiar();
 			}
 		});	
 		
@@ -188,5 +189,9 @@ public class BajaPremioForm extends JPanel {
 				combinacionText.setLineWrap(true);
 			}
 		});	
+	}
+	
+	private void limpiar() {
+		combinacionText.setText("");
 	}
 }

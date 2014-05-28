@@ -1,6 +1,5 @@
 package vista.config;
 
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -145,6 +144,7 @@ public class AltaPremioForm extends JPanel {
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(null, "Ocurrio un error al dar de alta el premio, revise los datos", "Error", JOptionPane.ERROR_MESSAGE);
 				}
+				limpiar();
 			}
 		});	
 		
@@ -195,5 +195,9 @@ public class AltaPremioForm extends JPanel {
 				combinacionText.setLineWrap(true);
 			}
 		});	
+	}
+	
+	private void limpiar() {
+		combinacionText.setText("");
 	}
 }

@@ -11,5 +11,9 @@ public class UserMessageView {
 	public String getMensaje() {
 		return mensaje;
 	}
+	
+	public void setMensaje(String msj) {
+		mensaje = msj;
+	}
 
 }
