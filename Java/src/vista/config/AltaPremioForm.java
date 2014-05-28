@@ -85,17 +85,17 @@ public class AltaPremioForm extends JPanel {
 
 		btnManzana = new JButton("Manzana");
 		//btnBanana.setIcon(new javax.swing.ImageIcon("banana.jpg")); 
-		btnManzana.setBounds(190, 200, 80, 25);
+		btnManzana.setBounds(190, 200, 85, 25);
 		add(btnManzana);
 
 		btnPera = new JButton("Pera");
 		//btnBanana.setIcon(new javax.swing.ImageIcon("banana.jpg")); 
-		btnPera.setBounds(280, 200, 80, 25);
+		btnPera.setBounds(290, 200, 80, 25);
 		add(btnPera);
 
 		btnSandia = new JButton("Sandia");
 		//btnBanana.setIcon(new javax.swing.ImageIcon("banana.jpg")); 
-		btnSandia.setBounds(370, 200, 80, 25);
+		btnSandia.setBounds(380, 200, 80, 25);
 		add(btnSandia);
 
 		btnAceptar = new JButton("Aceptar");
@@ -158,7 +158,7 @@ public class AltaPremioForm extends JPanel {
 		
 		btnSandia.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) { 
 				combinacionText.append("Sandia\n");
 				combinacionText.setLineWrap(true);
 			}
