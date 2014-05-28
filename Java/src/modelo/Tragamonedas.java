@@ -30,7 +30,7 @@ public class Tragamonedas {
 		}else if ( cantCasillas <= 0){
 			      throw new TragamonedasCreacionException("La cantidad de casillas debe ser mayor que 0.");
 		       }else if( recaudacionMinima > recaudacionInicial){
-				        throw new TragamonedasCreacionException("La recaudación mínima debe ser mayor que la recaudación inicial.");							        
+				        throw new TragamonedasCreacionException("La recaudaciï¿½n mï¿½nima debe ser mayor que la recaudaciï¿½n inicial.");							        
 		             }   
 		//-------------------------------------------------------------
 		
@@ -125,6 +125,31 @@ public class Tragamonedas {
 	
 		return false;
 	}
+	
+	public boolean buscarCombinacion(List<Fruta> combinacion){
+		
+		for (int i=0;i<premios.size();i++){
+			if (premios.get(i).getCombinacion().equals(combinacion)){
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean crearPremio(List<Fruta> combinacion, float valorPremio) {
+
+		if (buscarCombinacion(combinacion)){
+			return false; 
+		}
+		
+		premios.add(new Premio(combinacion, valorPremio));
+		
+		return true;
+		
+	}
+
+	public void incrementarCredito(Float creditoAdicional) {
+		credito += creditoAdicional;
+	}
 
 	/*GETTERS Y SETTERS*/
 
@@ -175,25 +200,5 @@ public class Tragamonedas {
 	 */
 	public List<Casilla> getCasillas() {
 		return casillas;
-	}
-	public boolean buscarCombinacion(List<Fruta> combinacion){
-		
-		for (int i=0;i<premios.size();i++){
-			if (premios.get(i).getCombinacion().equals(combinacion)){
-				return true;
-			}
-		}
-		return false;
-	}
-	public boolean crearPremio(List<Fruta> combinacion, float valorPremio) {
-
-		if (buscarCombinacion(combinacion)){
-			return false; 
-		}
-		
-		premios.add(new Premio(combinacion, valorPremio));
-		
-		return true;
-		
 	}
 }
