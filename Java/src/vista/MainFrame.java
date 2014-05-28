@@ -23,6 +23,7 @@ public class MainFrame extends JFrame {
 	private JLabel lblTragamonedasV;
 	private JButton btnConfiguracion;
 	private JButton btnJugar;
+	private JButton btnSalir;
 	private Sistema sistema;
 
 	public static void main(String[] args) {
@@ -43,7 +44,7 @@ public class MainFrame extends JFrame {
 
 	public MainFrame() {
 		setResizable(false);
-		setBounds(100, 100, 343, 197);
+		setBounds(100, 100, 343, 270);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		Usamos coordenadas fijas
 		getContentPane().setLayout(null);
@@ -70,6 +71,11 @@ public class MainFrame extends JFrame {
 		
 		btnJugar.setBounds(87, 117, 170, 25);
 		getContentPane().add(btnJugar);
+
+		btnSalir = new JButton("Salir");
+		
+		btnSalir.setBounds(87, 171, 170, 25);
+		getContentPane().add(btnSalir);
 	}
 	
 	private void initEvents() {
@@ -92,6 +98,14 @@ public class MainFrame extends JFrame {
 				JFrame juegoMain = new JuegoMain();
 				juegoMain.setVisible(true);
 				dispose();
+			}
+		});
+		btnSalir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+//				Cerrar sistema
+				System.exit(0);
 			}
 		});
 	}

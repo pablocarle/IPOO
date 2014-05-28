@@ -79,7 +79,7 @@ public class Tragamonedas {
      
 	//View de tragamonedas 
 	public TragamonedasView getView() {
-		TragamonedasView tragamonedas =new TragamonedasView(codigoTragamoneda, recaudacion, recaudacionMin, precioJugada, credito, premios, casillas, jugadas );
+		TragamonedasView tragamonedas =new TragamonedasView(codigoTragamoneda, recaudacion, recaudacionMin, precioJugada, credito );
 		
 		return tragamonedas;
 	}
