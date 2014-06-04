@@ -1,0 +1,34 @@
+
+Estos son los puntos que la profesora pidió corregir
+
+==================================
+FUNCIONALIDAD
+==================================
+
+
+Debe crearse un ABM de frutas
+
+
+ALTA DE TRAGAMONEDAS
+- Configuracion de los rodillos ( cuales frutas posibles van en cada casilla )
+
+BAJA DE PREMIOS
+- Agregar confirmacion en la baja de premios donde muestre ( combinacion, valor premio )
+  y el usuario puede confirmar la baja o bien anular la operación
+
+
+AUMENTO DE CREDITO y JUGADA
+
+- Crear ventana de jugada de usuario para realizar operaciones de jugada
+
+  * Debe mostrar cual es el credito disponible ( le sirve para saber hasta cuando puede jugar )
+  * Debe tener los siguientes botones
+   "jugar"
+   "aumentar credito" 
+   "cobrar credito"
+
+==================================
+DIAGRAMA DE CLASES
+==================================
+
+- Debe haber una relacion entre "premio" y "jugadaConPremio"
