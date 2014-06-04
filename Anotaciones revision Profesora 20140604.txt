@@ -6,26 +6,32 @@ FUNCIONALIDAD
 ==================================
 
 
-Debe crearse un ABM de frutas
+1.- Debe crearse un ABM de frutas
 
 
-ALTA DE TRAGAMONEDAS
-- Configuracion de los rodillos ( cuales frutas posibles van en cada casilla )
+2.- ALTA DE TRAGAMONEDAS
+  - Configuracion de los rodillos ( cuales frutas posibles van en cada casilla )
 
-BAJA DE PREMIOS
-- Agregar confirmacion en la baja de premios donde muestre ( combinacion, valor premio )
-  y el usuario puede confirmar la baja o bien anular la operación
+3.- BAJA DE PREMIOS
+  - Agregar confirmacion en la baja de premios donde muestre ( combinacion, valor premio )
+   y el usuario puede confirmar la baja o bien anular la operación
 
 
-AUMENTO DE CREDITO y JUGADA
+4.- AUMENTO DE CREDITO y JUGADA
 
-- Crear ventana de jugada de usuario para realizar operaciones de jugada
+  - Crear ventana de jugada de usuario para realizar operaciones de jugada
 
-  * Debe mostrar cual es el credito disponible ( le sirve para saber hasta cuando puede jugar )
-  * Debe tener los siguientes botones
-   "jugar"
-   "aumentar credito" 
-   "cobrar credito"
+    * Debe mostrar cual es el credito disponible ( le sirve para saber hasta cuando puede jugar )
+    * Debe tener los siguientes botones
+      "jugar"
+      "aumentar credito" 
+      "cobrar credito"
+
+    NOTA: EL usuario comienza con 0 credito y debe primero presionar el botón "aumentar credito", seria como 
+          si cargara fichas o monedas a la maquina. Luego recien cuando hay credito disponible mayor o igual 
+          al costo de jugada, podra usar el boton "jugar".  
+          En cualquier momento se puede presionar el boton "cobrar credito" y el usuario asi se lleva el dinero
+          que fue ganando.
 
 ==================================
 DIAGRAMA DE CLASES
