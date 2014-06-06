@@ -34,7 +34,7 @@ public class MainFrame extends JFrame {
 			@Override
 			public void run() {
 				try {
-					MainFrame frame = new MainFrame();
+					MainFrame frame = new MainFrame(new Sistema());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +43,7 @@ public class MainFrame extends JFrame {
 		});
 	}
 
-	public MainFrame() {
+	public MainFrame(Sistema sistema) {
 		setResizable(false);
 		setBounds(100, 100, 343, 270);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,7 +52,7 @@ public class MainFrame extends JFrame {
 		setTitle("Tragamonedas V1.0");
 		
 		initGUI();
-		sistema = new Sistema();
+		this.sistema = sistema;
 		
 		initEvents();
 

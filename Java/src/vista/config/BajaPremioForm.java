@@ -117,7 +117,7 @@ public class BajaPremioForm extends JPanel {
 //				Cerrar la ventana y volver al menu principal
 				JFrame configFrame = (JFrame)getParent().getParent().getParent().getParent();
 				configFrame.dispose();
-				JFrame mainPage = new MainFrame();
+				JFrame mainPage = new MainFrame(sistema);
 				mainPage.setVisible(true);
 			}
 		});

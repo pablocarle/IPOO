@@ -8,7 +8,6 @@ import modelo.Fruta;
 import modelo.Jugada;
 import modelo.Tragamonedas;
 import vista.TragamonedasView;
-//import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 import vista.UserMessageView;
 import controlador.exceptions.CombinacionExistenteException;
 import controlador.exceptions.MaquinaNoEncontradaException;
@@ -20,7 +19,8 @@ public class Sistema {
 
 	private List<Fruta> frutasDisponibles;
 	private List<Tragamonedas> tragamonedas;
-
+	
+	
 	public Sistema() {
 
 		frutasDisponibles = new Vector<Fruta>();
@@ -38,10 +38,20 @@ public class Sistema {
 		return false;
 
 	}
+	
+	public boolean agregarFruta(String nombre, String url) {
+		Fruta fruta = new Fruta(nombre, url);
+		
+		if (!frutasDisponibles.contains(fruta)) {
+			frutasDisponibles.add(fruta);
+			return true;
+		}
+		
+		return false;
+	}
 
 	/**
-	 * TODO Esto deberia devolver una vista
-	 * 
+	 *  
 	 * @param precioJugada
 	 * @param recaudacionInicial
 	 * @param recaudacionMinima
