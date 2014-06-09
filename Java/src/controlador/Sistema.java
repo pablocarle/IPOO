@@ -49,6 +49,10 @@ public class Sistema {
 		
 		return false;
 	}
+	
+	public List<Fruta> obtenerListaFrutas() {
+		return new Vector<Fruta>(frutasDisponibles);
+	}
 
 	/**
 	 *  
