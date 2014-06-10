@@ -30,6 +30,8 @@ public class CasillasConfigFrame extends JFrame {
 	private JButton quitarDestino;
 	
 	private Sistema sistema;
+	private JButton btnAceptar;
+	private JButton btnCancelar;
 
 	/**
 	 * Create the frame.
@@ -37,8 +39,8 @@ public class CasillasConfigFrame extends JFrame {
 	public CasillasConfigFrame(Sistema sistema, TragamonedasView tragamonedas) {
 		this.sistema = sistema;
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setBounds(100, 100, 451, 397);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -51,7 +53,7 @@ public class CasillasConfigFrame extends JFrame {
 	private void initGUI() {
 
 		listaOrigen = new JList<Fruta>();
-		listaOrigen.setBounds(22, 39, 96, 11);
+		listaOrigen.setBounds(12, 39, 158, 170);
 		contentPane.add(listaOrigen);
 //		Lista origen se inicializa con todas las frutas disponibles en el sistema
 		listaOrigen.setListData((Vector<Fruta>)sistema.obtenerListaFrutas());
@@ -61,8 +63,20 @@ public class CasillasConfigFrame extends JFrame {
 		contentPane.add(pasarDestino);
 		
 		listaDestino = new JList<Fruta>();
-		listaDestino.setBounds(293, 39, 96, 11);
+		listaDestino.setBounds(238, 39, 143, 170);
 		contentPane.add(listaDestino);
+		
+		quitarDestino = new JButton("<");
+		quitarDestino.setBounds(182, 72, 44, 25);
+		contentPane.add(quitarDestino);
+		
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(53, 221, 117, 25);
+		contentPane.add(btnAceptar);
+		
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(238, 221, 117, 25);
+		contentPane.add(btnCancelar);
 	}
 	
 	private void initEvents() {
@@ -70,7 +84,33 @@ public class CasillasConfigFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				listaDestino.add(listaOrigen.getSelectedValue());
+				listaDestino.setListData(listaOrigen.getSelectedValuesList().toArray(new Fruta[0]));
+				
+			}
+		});
+		
+		quitarDestino.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				listaDestino.setListData(new Fruta[0]);		
+			}
+		});
+		
+		btnAceptar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		btnCancelar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
 				
 			}
 		});

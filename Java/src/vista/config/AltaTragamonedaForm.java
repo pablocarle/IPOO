@@ -110,6 +110,10 @@ public class AltaTragamonedaForm extends JPanel {
 					vistaRetorno = sistema.crearTragamonedas(Float.parseFloat(precioJugadaText.getText()), Float.parseFloat(recaudacionIniText.getText()), Float.parseFloat(recaudacionMinText.getText()), Integer.parseInt(cantCasillasText.getText()) );
 					JOptionPane.showMessageDialog(null, "Se genero correctamente el tragamonedas con codigo: " + vistaRetorno.getCodigoTragamoneda());
 					
+//					Mostrar ventana de configuracion de casillas, deshabilitar esta
+					getParent().getParent().getParent().getParent().setEnabled(false);
+					new CasillasConfigFrame(sistema, vistaRetorno).setVisible(true);;
+					
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(null, "Formato de numero incorrecto, verifique los datos ingresados");
 				} catch (TragamonedasCreacionException e) {			

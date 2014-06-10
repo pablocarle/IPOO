@@ -35,7 +35,11 @@ public class Fruta {
 //		Si no esta comparando con otra fruta, utilizar el comportamiento default de Object
 		return super.equals(obj);
 	}
-
+	
+	@Override
+	public String toString() {
+		return nombre;
+	}
 
 	/**
 	 * @return the nombre
