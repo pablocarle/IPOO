@@ -153,6 +153,10 @@ public class Tragamonedas {
 	public void incrementarCredito(Float creditoAdicional) {
 		credito += creditoAdicional;
 	}
+	
+	public void cobrarCredito(){
+		credito = 0;
+	}
 
 	/*GETTERS Y SETTERS*/
 

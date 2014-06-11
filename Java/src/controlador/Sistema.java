@@ -201,4 +201,28 @@ public class Sistema {
 		}
 		return null;
 	}
+	
+	public UserMessageView cobrarCredito(Integer nbrMaquina) {
+
+		try {
+			Tragamonedas maquina = this.buscarTragamonedas(nbrMaquina);
+			String texto ="El 'Credito' cobrado de la maquina " + nbrMaquina + " es " + maquina.getCredito();
+			maquina.cobrarCredito();
+			return new UserMessageView(texto);
+		} catch (MaquinaNoEncontradaException e) {
+			return new UserMessageView("No se encontro la maquina solicitada");
+		}
+	}
+	
+	public Float obtenerCredito(Integer nbrMaquina) throws MaquinaNoEncontradaException{
+
+		Tragamonedas maquina = this.buscarTragamonedas(nbrMaquina);
+		if (maquina!=null){	
+		   return maquina.getCredito();
+		}
+		
+		throw new MaquinaNoEncontradaException("No se encontro el tragamonedas solicitado");
+	} 
+	
+	
 }

@@ -96,7 +96,7 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 //				Abrir ventana de juego
-				JFrame juegoMain = new JuegoMain();
+				JFrame juegoMain = new JuegoMain(sistema);
 				juegoMain.setVisible(true);
 				dispose();
 			}
