@@ -26,6 +26,7 @@ public class JuegoMain extends JFrame {
 	private JTextField txtCreditoACargar;
 	private JTextField txtTragamonedasNbr;
 	
+	private JButton btnBuscar;
 	private JButton btnSalir;
 	private JButton btnIncrementarCredito;
 	private JButton btnJugar;
@@ -62,16 +63,19 @@ public class JuegoMain extends JFrame {
 		lblMaquina.setBounds(10, 7, 80, 21);
 		
 		txtTragamonedasNbr = new JTextField();
-		txtTragamonedasNbr.setBounds(95, 7, 67, 20);
+		txtTragamonedasNbr.setBounds(74, 7, 67, 20);
 		txtTragamonedasNbr.setColumns(10);
 
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(151, 6, 89, 23);
 		
 		JLabel lblCreditoActual = new JLabel("Credito Disponible");
-		lblCreditoActual.setBounds(283, 0, 159, 33);
+		lblCreditoActual.setBounds(328, 1, 125, 33);
 		
 		txtCreditoActual = new JTextField();
 		txtCreditoActual.setBounds(452, 7, 131, 20);
 		txtCreditoActual.setColumns(10);
+		txtCreditoActual.setEditable(false);
 		
         //--------------------------------
 		//Seccion destinada a las imagenes de las frutas ( FALTA VER COMO HACER ESO )
@@ -132,11 +136,30 @@ public class JuegoMain extends JFrame {
 		contentPane.add(lblIncrementarCredito);
 		contentPane.add(btnIncrementarCredito);
 		
+		contentPane.add(btnBuscar);
+		
 		
 	}
 	
 	private void initEvents() {
        
+		btnBuscar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Integer nbrMaquina = Integer.parseInt(txtTragamonedasNbr.getText());
+					txtCreditoActual.setText(sistema.obtenerCredito(nbrMaquina).toString()   );
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "Ocurrio un error de carga de credito adiciona, revise los datos ingresados");
+				} catch (MaquinaNoEncontradaException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
+				repaint();
+
+			}
+		});
+
 		btnSalir.addActionListener(new ActionListener() {
 			
 			@Override

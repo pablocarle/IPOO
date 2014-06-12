@@ -1,8 +1,10 @@
 package modelo;
 
 import java.util.List;
+
 import java.util.Vector;
 
+import vista.JugadaView;
 import vista.TragamonedasView;
 import controlador.exceptions.CantidadCasillasIncorrectaException;
 import controlador.exceptions.CombinacionExistenteException;
@@ -94,6 +96,13 @@ public class Tragamonedas {
 	 * 
 	 * @return
 	 */
+	public JugadaView jugarConMaquina() {
+
+        Jugada jugada=this.jugar();
+        JugadaView jugadaVista= jugada.getView();
+        return jugadaVista;
+	}	
+
 	public Jugada jugar() {
 
 		List<Fruta> combinacion = new Vector<Fruta>();

@@ -2,6 +2,8 @@ package modelo;
 
 import java.util.List;
 
+import vista.JugadaView;
+
 public abstract class Jugada {
 	
 	List<Fruta> combinacion;
@@ -10,6 +12,14 @@ public abstract class Jugada {
 		this.combinacion =  combinacion;
 	}
 	
+	public List<Fruta> getCombinacion(){
+		return combinacion;
+	}
+
 	public abstract boolean tienePremio();
+
+	public abstract float getPremioValor();
+	
+	public abstract JugadaView getView();
 
 }

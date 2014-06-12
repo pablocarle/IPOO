@@ -1,12 +1,14 @@
 package controlador;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Vector;
 
 import modelo.Fruta;
 import modelo.Jugada;
 import modelo.Tragamonedas;
+import vista.JugadaView;
 import vista.TragamonedasView;
 import vista.UserMessageView;
 import controlador.exceptions.CombinacionExistenteException;
@@ -124,9 +126,9 @@ public class Sistema {
 		try {
 			Tragamonedas maquina = this.buscarTragamonedas(nroMaquina);
 
-			Jugada jugada = maquina.jugar();
+			JugadaView jugada = maquina.jugarConMaquina();
 
-			if (jugada.tienePremio()) {
+			if (jugada.getTienePremio()) {
 				//				TODO Hacer algo si la jugada tuvo premio
 			} else {
 				//				TODO Hacer algo si la jugada no tuvo premio

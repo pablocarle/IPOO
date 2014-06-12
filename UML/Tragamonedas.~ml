@@ -662,7 +662,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">436</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">1180</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">1176</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">208</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">80</XPD:ATTR>
 <XPD:REF name="Model">q5rd522LVUSrCwbPpj9UzAAA</XPD:REF>
@@ -693,7 +693,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">643,1259;689,1259;689,1082</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">643,1215;689,1215;689,1082</XPD:ATTR>
 <XPD:REF name="Model">UbriDhCpjkWzq6BKgJUylgAA</XPD:REF>
 <XPD:REF name="Head">kdPyJEq7GUiJnh4ojl3NoQAA</XPD:REF>
 <XPD:REF name="Tail">24sewo5BJ0eKfPY7FqUWFQAA</XPD:REF>
@@ -1643,7 +1643,7 @@ recaudacionMin --&gt; Marca </XPD:ATTR>
 <XPD:REF name="Generalizations[1]">oTTq/UWQ3UGRMrQEX4NkFgAA</XPD:REF>
 <XPD:ATTR name="#Specializations" type="integer">1</XPD:ATTR>
 <XPD:REF name="Specializations[0]">klShURsQ1E63kWgAA7wLwgAA</XPD:REF>
-<XPD:ATTR name="#Operations" type="integer">2</XPD:ATTR>
+<XPD:ATTR name="#Operations" type="integer">3</XPD:ATTR>
 <XPD:OBJ name="Operations[0]" type="UMLOperation" guid="nO/nJelDP0KxzO6WH/8zPAAA">
 <XPD:ATTR name="Name" type="string">JugadaConPremio</XPD:ATTR>
 <XPD:REF name="Owner">beRk0B+T5UuEevTH4e55mgAA</XPD:REF>
@@ -1665,6 +1665,16 @@ recaudacionMin --&gt; Marca </XPD:ATTR>
 <XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">boolean</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">e/mex3mjyE+YMxp5WhenpwAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="Operations[2]" type="UMLOperation" guid="GEIz2VRARkKKuuuQnDbyVwAA">
+<XPD:ATTR name="Name" type="string">getView</XPD:ATTR>
+<XPD:REF name="Owner">beRk0B+T5UuEevTH4e55mgAA</XPD:REF>
+<XPD:ATTR name="#Parameters" type="integer">1</XPD:ATTR>
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="f0VccJolpEiKpCLfWMRMGgAA">
+<XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">GEIz2VRARkKKuuuQnDbyVwAA</XPD:REF>
+<XPD:REF name="Type_">bvVHBt2/ZEKOutUFlrHhxAAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:ATTR name="#Associations" type="integer">6</XPD:ATTR>
@@ -3219,7 +3229,7 @@ recaudacionMin --&gt; Marca </XPD:ATTR>
 <XPD:REF name="Views[3]">N5NXupltLEKk51KYAT4XpQAA</XPD:REF>
 <XPD:ATTR name="#Generalizations" type="integer">1</XPD:ATTR>
 <XPD:REF name="Generalizations[0]">UbriDhCpjkWzq6BKgJUylgAA</XPD:REF>
-<XPD:ATTR name="#Operations" type="integer">1</XPD:ATTR>
+<XPD:ATTR name="#Operations" type="integer">2</XPD:ATTR>
 <XPD:OBJ name="Operations[0]" type="UMLOperation" guid="OWEiLUwVM0KJ0sID8ZLmWQAA">
 <XPD:ATTR name="Name" type="string">tienePremio</XPD:ATTR>
 <XPD:REF name="Owner">q5rd522LVUSrCwbPpj9UzAAA</XPD:REF>
@@ -3228,6 +3238,16 @@ recaudacionMin --&gt; Marca </XPD:ATTR>
 <XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">boolean</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">OWEiLUwVM0KJ0sID8ZLmWQAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="Operations[1]" type="UMLOperation" guid="dC9MouwPkEy6DmYbl72hwQAA">
+<XPD:ATTR name="Name" type="string">getView</XPD:ATTR>
+<XPD:REF name="Owner">q5rd522LVUSrCwbPpj9UzAAA</XPD:REF>
+<XPD:ATTR name="#Parameters" type="integer">1</XPD:ATTR>
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="7WrqZuIluEWngFE9jFKt4gAA">
+<XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">dC9MouwPkEy6DmYbl72hwQAA</XPD:REF>
+<XPD:REF name="Type_">bvVHBt2/ZEKOutUFlrHhxAAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
 </XPD:OBJ>
@@ -3550,10 +3570,12 @@ recaudacionMin --&gt; Marca </XPD:ATTR>
 <XPD:REF name="BehavioralFeature">0gigepVNbEeIaQyL2QegzAAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:ATTR name="#TypedParameters" type="integer">3</XPD:ATTR>
+<XPD:ATTR name="#TypedParameters" type="integer">5</XPD:ATTR>
 <XPD:REF name="TypedParameters[0]">LS5n/hXn+kq3n4jKJXFksAAA</XPD:REF>
 <XPD:REF name="TypedParameters[1]">FPufPUVM0kWckWZIHVrNFAAA</XPD:REF>
 <XPD:REF name="TypedParameters[2]">g/4d9Ye8pkGsfARqmTyczAAA</XPD:REF>
+<XPD:REF name="TypedParameters[3]">7WrqZuIluEWngFE9jFKt4gAA</XPD:REF>
+<XPD:REF name="TypedParameters[4]">f0VccJolpEiKpCLfWMRMGgAA</XPD:REF>
 <XPD:ATTR name="#Associations" type="integer">1</XPD:ATTR>
 <XPD:REF name="Associations[0]">YdunvzslBkSW9py2mdSzeAAA</XPD:REF>
 <XPD:ATTR name="#Attributes" type="integer">3</XPD:ATTR>
