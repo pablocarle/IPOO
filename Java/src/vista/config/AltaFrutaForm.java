@@ -87,13 +87,13 @@ public class AltaFrutaForm extends JPanel {
 		add(txtArchivo);
 		txtArchivo.setColumns(10);
 		
-		JButton btnAceptar = new JButton("Cancelar");
-		btnAceptar.setBounds(226, 90, 117, 25);
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(97, 90, 117, 25);
+		
 		add(btnAceptar);
 		
-		JButton btnCancelar = new JButton("Aceptar");
-
-		btnCancelar.setBounds(97, 90, 117, 25);
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(226, 90, 117, 25);
 		add(btnCancelar);
 	}
 }

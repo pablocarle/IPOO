@@ -61,7 +61,7 @@ public class Sistema {
 	 * @param recaudacionMinima
 	 * @param cantCasillas
 	 */
-	public TragamonedasView crearTragamonedas(float precioJugada, float recaudacionInicial, float recaudacionMinima, int cantCasillas) throws TragamonedasCreacionException {
+	public TragamonedasView crearTragamonedas(float precioJugada, float recaudacionInicial, float recaudacionMinima, int cantCasillas, boolean cargaDefault) throws TragamonedasCreacionException {
 
 		Tragamonedas tragamonedasNuevo = new Tragamonedas(tragamonedas.size() + 1, precioJugada, recaudacionInicial, recaudacionMinima, cantCasillas);
 		tragamonedas.add(tragamonedasNuevo);
@@ -70,6 +70,17 @@ public class Sistema {
 		}
 		return tragamonedasNuevo.getView();
 
+	}
+	
+	public boolean eliminarTragamonedas(int nroTragamonedas) {
+		
+		try {
+			Tragamonedas maquina = this.buscarTragamonedas(nroTragamonedas);
+			tragamonedas.remove(maquina);
+			return true;
+		} catch (MaquinaNoEncontradaException e) {
+			return false; 
+		}
 	}
 
 
@@ -224,5 +235,16 @@ public class Sistema {
 		throw new MaquinaNoEncontradaException("No se encontro el tragamonedas solicitado");
 	} 
 	
-	
+	public boolean iniciarCasillas(int nroTragamoneda, List<List<Fruta>> casillas ) {
+		
+		try {
+			Tragamonedas maquina = buscarTragamonedas(nroTragamoneda);
+			for (List<Fruta> casilla : casillas) {
+				maquina.cargarCasilla(casillas.indexOf(casilla), casilla);
+			}
+			return true;
+		} catch (MaquinaNoEncontradaException e) {
+			return false;
+		}
+	}
 }

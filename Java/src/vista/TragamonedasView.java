@@ -1,14 +1,10 @@
 package vista;
 
-import java.util.List;
-
-import modelo.Casilla;
-import modelo.Jugada;
-import modelo.Premio;
 
 public class TragamonedasView {
 
 	private int codigoTragamoneda;
+	private int cantidadCasillas;
 	private float recaudacion;
 	private float recaudacionMin;
 	private float precioJugada;
@@ -16,14 +12,14 @@ public class TragamonedasView {
 
 
 			
-	public TragamonedasView(int codigoTragamoneda, float recaudacion, float recaudacionMin, float precioJugada, float credito) {
+	public TragamonedasView(int codigoTragamoneda, int cantidadCasillas, float recaudacion, float recaudacionMin, float precioJugada, float credito) {
 		
 		this.codigoTragamoneda=codigoTragamoneda;
 		this.recaudacion=recaudacion;
 		this.recaudacionMin=recaudacionMin;
 		this.precioJugada=precioJugada;
 		this.credito=credito;
-
+		this.cantidadCasillas = cantidadCasillas;
 				
 	}
 
@@ -53,4 +49,7 @@ public class TragamonedasView {
 	}
 
 
+	public int getCantidadCasillas() {
+		return cantidadCasillas;
+	}	
 }

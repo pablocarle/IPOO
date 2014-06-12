@@ -1,9 +1,11 @@
 package vista.config;
 
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,6 +27,8 @@ public class AltaTragamonedaForm extends JPanel {
 	private JTextField recaudacionIniText;
 	private JTextField recaudacionMinText;
 	private JTextField cantCasillasText;
+	
+	private JCheckBox defaultLoad;
 	
 	private JLabel lblPrecioDeJugada;
 	private JLabel lblRecaudacionInicial;
@@ -88,12 +92,17 @@ public class AltaTragamonedaForm extends JPanel {
 		add(cantCasillasText);
 		cantCasillasText.setColumns(10);
 		
+//		Check de carga default del tragamonedas
+		defaultLoad = new JCheckBox("Carga default");
+		defaultLoad.setBounds(324, 136, 114, 19);
+		add(defaultLoad);
+		
 //		Botones
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(97, 150, 117, 25);
+		btnAceptar.setBounds(97, 160, 117, 25);
 		add(btnAceptar);
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(242, 150, 117, 25);
+		btnCancelar.setBounds(242, 160, 117, 25);
 		add(btnCancelar);
 	}
 	
@@ -106,13 +115,18 @@ public class AltaTragamonedaForm extends JPanel {
 				TragamonedasView vistaRetorno;
 				
 				try	{
-				
-					vistaRetorno = sistema.crearTragamonedas(Float.parseFloat(precioJugadaText.getText()), Float.parseFloat(recaudacionIniText.getText()), Float.parseFloat(recaudacionMinText.getText()), Integer.parseInt(cantCasillasText.getText()) );
-					JOptionPane.showMessageDialog(null, "Se genero correctamente el tragamonedas con codigo: " + vistaRetorno.getCodigoTragamoneda());
 					
-//					Mostrar ventana de configuracion de casillas, deshabilitar esta
-					getParent().getParent().getParent().getParent().setEnabled(false);
-					new CasillasConfigFrame(sistema, vistaRetorno).setVisible(true);;
+					if (defaultLoad.isSelected()) {
+						vistaRetorno = sistema.crearTragamonedas(Float.parseFloat(precioJugadaText.getText()), Float.parseFloat(recaudacionIniText.getText()), Float.parseFloat(recaudacionMinText.getText()), Integer.parseInt(cantCasillasText.getText()), true );
+						JOptionPane.showMessageDialog(null, "Se genero correctamente el tragamonedas con codigo: " + vistaRetorno.getCodigoTragamoneda());
+					} else {
+						vistaRetorno = sistema.crearTragamonedas(Float.parseFloat(precioJugadaText.getText()), Float.parseFloat(recaudacionIniText.getText()), Float.parseFloat(recaudacionMinText.getText()), Integer.parseInt(cantCasillasText.getText()), false );
+						
+//						Mostrar ventana de configuracion de casillas, deshabilitar esta
+						Container frame = getParent().getParent().getParent().getParent();
+						frame.setEnabled(false);
+						new CasillasConfigFrame(sistema, vistaRetorno, frame).setVisible(true);;
+					}
 					
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(null, "Formato de numero incorrecto, verifique los datos ingresados");

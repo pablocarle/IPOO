@@ -20,12 +20,12 @@ public class ConfigMain extends JFrame {
 	private JPanel altaTragamonedas;
 	private JPanel altaPremio;
 	private JPanel bajaPremio;
-	private JPanel cargaCredito;
+	private JPanel fruteria;
 	
 	private JButton btnAltaTragamonedas;
 	private JButton btnAltaPremio;
 	private JButton btnBajaPremios;
-	private JButton btnCargaDeCredito;
+	private JButton btnFruteria;
 	
 	private Sistema sistema;
 	
@@ -57,16 +57,16 @@ public class ConfigMain extends JFrame {
 		bajaPremio = new BajaPremioForm(sistema);
 		bajaPremio.setBounds(12, 110, 761, 700);
 		bajaPremio.setVisible(false);
-		cargaCredito = new CargaCreditoForm(sistema);
-		cargaCredito.setBounds(12, 110, 761, 700);
-		cargaCredito.setVisible(false);
+		fruteria = new AltaFrutaForm(sistema);
+		fruteria.setBounds(12, 110, 761, 700);
+		fruteria.setVisible(false);
 		
 		btnAltaTragamonedas = new JButton("Alta Tragamonedas");
 		btnAltaTragamonedas.setBounds(12, 12, 187, 25);
 		btnAltaPremio = new JButton("Alta Premios");
 		btnAltaPremio.setBounds(12, 49, 187, 25);
-		btnCargaDeCredito = new JButton("Carga de Credito");
-		btnCargaDeCredito.setBounds(300, 12, 173, 25);
+		btnFruteria = new JButton("Fruteria");
+		btnFruteria.setBounds(300, 12, 173, 25);
 		btnBajaPremios = new JButton("Baja Premios");
 		btnBajaPremios.setBounds(300, 49, 173, 25);
 		
@@ -75,14 +75,14 @@ public class ConfigMain extends JFrame {
 		
 		getContentPane().add(separator);
 		getContentPane().add(btnBajaPremios);
-		getContentPane().add(btnCargaDeCredito);
+		getContentPane().add(btnFruteria);
 		getContentPane().add(btnAltaPremio);
 		getContentPane().add(btnAltaTragamonedas);
 		
 		getContentPane().add(altaTragamonedas);
 		getContentPane().add(altaPremio);
 		getContentPane().add(bajaPremio);
-		getContentPane().add(cargaCredito);
+		getContentPane().add(fruteria);
 	}
 	
 	private void initEvents() {
@@ -96,7 +96,7 @@ public class ConfigMain extends JFrame {
 				altaTragamonedas.setVisible(true);
 				altaPremio.setVisible(false);
 				bajaPremio.setVisible(false);
-				cargaCredito.setVisible(false);
+				fruteria.setVisible(false);
 				repaint();
 			}
 		});
@@ -109,11 +109,11 @@ public class ConfigMain extends JFrame {
 				altaTragamonedas.setVisible(false);
 				altaPremio.setVisible(true);
 				bajaPremio.setVisible(false);
-				cargaCredito.setVisible(false);
+				fruteria.setVisible(false);
 			}
 		});
 		
-		btnCargaDeCredito.addActionListener(new ActionListener() {
+		btnFruteria.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -121,7 +121,7 @@ public class ConfigMain extends JFrame {
 				altaTragamonedas.setVisible(false);
 				altaPremio.setVisible(false);
 				bajaPremio.setVisible(false);
-				cargaCredito.setVisible(true);
+				fruteria.setVisible(true);
 			}
 		});
 		
@@ -133,7 +133,7 @@ public class ConfigMain extends JFrame {
 				altaTragamonedas.setVisible(false);
 				altaPremio.setVisible(false);
 				bajaPremio.setVisible(true);
-				cargaCredito.setVisible(false);
+				fruteria.setVisible(false);
 			}
 		});
 	}

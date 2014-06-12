@@ -84,7 +84,7 @@ public class Tragamonedas {
 
 	//View de tragamonedas 
 	public TragamonedasView getView() {
-		TragamonedasView tragamonedas =new TragamonedasView(codigoTragamoneda, recaudacion, recaudacionMin, precioJugada, credito );
+		TragamonedasView tragamonedas = new TragamonedasView(codigoTragamoneda, casillas.size(), recaudacion, recaudacionMin, precioJugada, credito );
 
 		return tragamonedas;
 	}
@@ -207,5 +207,12 @@ public class Tragamonedas {
 	 */
 	public List<Casilla> getCasillas() {
 		return casillas;
+	}
+
+	public void cargarCasilla(int posicionCasilla, List<Fruta> frutas) {
+		
+		Casilla nuevaCasilla = new Casilla(frutas);
+		casillas.add(posicionCasilla, nuevaCasilla);
+		
 	}
 }

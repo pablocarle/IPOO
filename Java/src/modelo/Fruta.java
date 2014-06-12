@@ -28,7 +28,7 @@ public class Fruta {
 		if (obj instanceof Fruta) {
 			Fruta fruta2 = (Fruta) obj;
 			
-			return (fruta2.getNombre().equalsIgnoreCase(this.getNombre()) && fruta2.getUrlImagen().equalsIgnoreCase(this.getUrlImagen()));
+			return (fruta2.getNombre().equalsIgnoreCase(this.getNombre()));
 			
 		}
 		
