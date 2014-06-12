@@ -1,7 +1,6 @@
 package controlador;
 
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Vector;
 
@@ -16,6 +15,7 @@ import controlador.exceptions.MaquinaNoEncontradaException;
 import controlador.exceptions.PremioException;
 import controlador.exceptions.PremioNoEncontradoException;
 import controlador.exceptions.TragamonedasCreacionException;
+import controlador.exceptions.TragamonedasException;
 
 public class Sistema {
 
@@ -121,23 +121,26 @@ public class Sistema {
 	/**
 	 * TODO Esto deberia devolver una vista
 	 */
-	public void jugarConMaquina(int nroMaquina) {
+	public JugadaView jugarConMaquina(int nroMaquina) throws TragamonedasException {
 
 		try {
 			Tragamonedas maquina = this.buscarTragamonedas(nroMaquina);
 
 			JugadaView jugada = maquina.jugarConMaquina();
+			
+			return jugada;
 
+			/*
 			if (jugada.getTienePremio()) {
-				//				TODO Hacer algo si la jugada tuvo premio
+				throw new TragamonedasException("Jugada con Premio");
 			} else {
-				//				TODO Hacer algo si la jugada no tuvo premio
-			}
+				throw new TragamonedasException("Jugada sin Premio");
+			}*/
 
 		} catch (MaquinaNoEncontradaException e) {
-			//			TODO Devolver vista con error al usuario
+			throw new TragamonedasException(e.getMessage());
 		} catch (Exception e) {
-			//			Error no esperado
+			throw new TragamonedasException(e.getMessage());
 		}	
 	}
 
@@ -236,6 +239,17 @@ public class Sistema {
 		
 		throw new MaquinaNoEncontradaException("No se encontro el tragamonedas solicitado");
 	} 
+	
+	public Float obtenerPrecioJugada(Integer nbrMaquina) throws MaquinaNoEncontradaException{
+
+		Tragamonedas maquina = this.buscarTragamonedas(nbrMaquina);
+		if (maquina!=null){	
+		   return maquina.getPrecioJugada();
+		}
+		
+		throw new MaquinaNoEncontradaException("No se encontro el tragamonedas solicitado");
+		
+	}
 	
 	public boolean iniciarCasillas(int nroTragamoneda, List<List<Fruta>> casillas ) {
 		

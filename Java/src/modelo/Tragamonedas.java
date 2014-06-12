@@ -11,6 +11,7 @@ import controlador.exceptions.CombinacionExistenteException;
 import controlador.exceptions.PremioException;
 import controlador.exceptions.PremioNoEncontradoException;
 import controlador.exceptions.TragamonedasCreacionException;
+import controlador.exceptions.TragamonedasException;
 
 public class Tragamonedas {
 
@@ -42,8 +43,9 @@ public class Tragamonedas {
 
 		this.codigoTragamoneda = codigoTragamoneda;
 		this.precioJugada = precioJugada;
-		this.credito = recaudacionInicial;
+		this.recaudacion = recaudacionInicial;
 		this.recaudacionMin = recaudacionMinima;
+		this.credito = 0;
 
 		//		Crea un Vector reservando desde el inicio "cantCasillas" de espacios, de este modo se puede acceder a subindices aunque no esten cargados, evitando excepciones
 		this.casillas = new Vector<Casilla>(cantCasillas);
@@ -96,11 +98,25 @@ public class Tragamonedas {
 	 * 
 	 * @return
 	 */
-	public JugadaView jugarConMaquina() {
+	public JugadaView jugarConMaquina() throws TragamonedasException {
+		List<Fruta> combinacionDummy=new Vector<Fruta>();
+		boolean tienePremioDummy=false;
+		float premioValorDummy=0;
 
-        Jugada jugada=this.jugar();
-        JugadaView jugadaVista= jugada.getView();
-        return jugadaVista;
+		try {
+			if (this.sePuedeJugar()){
+		        Jugada jugada=this.jugar();
+		        JugadaView jugadaVista= jugada.getView();
+		        return jugadaVista;
+				
+			}
+		} catch (TragamonedasException e){
+			throw new TragamonedasException(e.getMessage());
+			
+		}
+
+		return new JugadaView(combinacionDummy, tienePremioDummy, premioValorDummy);
+	
 	}	
 
 	public Jugada jugar() {
@@ -114,6 +130,8 @@ public class Tragamonedas {
 			combinacion.add(fruta);
 
 		}
+		this.setRecaudacion(this.getRecaudacion()+this.precioJugada);
+		this.setCredito(this.getCredito()-this.getPrecioJugada());
 
 		if (this.esJugadaConPremio(combinacion))
 			return new JugadaConPremio(combinacion);
@@ -205,6 +223,20 @@ public class Tragamonedas {
 	}
 
 	/**
+	 * @set the recaudacion
+	 */
+	private void setRecaudacion(float recaudacionNueva) {
+		recaudacion=recaudacionNueva;
+	}
+
+	/**
+	 * @set the credito
+	 */
+	private void setCredito(float creditoNuevo) {
+		credito=creditoNuevo;
+	}
+
+	/**
 	 * @return the premios
 	 */
 	public List<Premio> getPremios() {
@@ -224,4 +256,33 @@ public class Tragamonedas {
 		casillas.add(posicionCasilla, nuevaCasilla);
 		
 	}
+
+	private boolean sePuedeJugar() throws TragamonedasException {
+        
+		boolean sePuede=true;
+		
+		if (this.getCredito()>=0.0){
+			if (this.getCredito()>=this.getPrecioJugada()){
+				if (this.getRecaudacion()>this.getRecaudacionMin()){
+					sePuede=true;
+				}else{
+					sePuede=false;
+					throw new TragamonedasException("Se alcanzó la recaudación minima");
+				}
+				
+			}else{
+				sePuede=false;
+				throw new TragamonedasException("El credito actual de la maquina debe ser mayor o igual al precio de la jugada ");
+			}
+			
+		}else{
+			sePuede=false;
+			throw new TragamonedasException("El credito actual de la maquina debe ser mayor que 0");
+		}
+		return sePuede;
+
+	}
+
+	
+	
 }
