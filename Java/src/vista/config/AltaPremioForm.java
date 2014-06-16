@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,10 +14,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JList;
 
 import vista.MainFrame;
 import vista.UserMessageView;
 import controlador.Sistema;
+import modelo.*;
 
 public class AltaPremioForm extends JPanel {
 	/**
@@ -26,22 +30,23 @@ public class AltaPremioForm extends JPanel {
 	private JTextField valorPremioText;
 	private JTextField nroMaquinaText;
 	private JTextArea  combinacionText;
-	private JButton btnBanana;
-	private JButton btnFrutilla;
-	private JButton btnManzana;
-	private JButton btnPera;
-	private JButton btnSandia;
+	private JButton btnBuscar;
 	private JButton btnAceptar;
 	private JButton btnCancelar;
 	private JButton btnLimpiar;
+	private JButton btnPoner;
+	private JButton btnSacar;
+	private JList ListadoFrutas;
+	private JList<String> ListadoCasillas;
 	private Sistema sistema;
-
+	private Vector<Fruta> Listado;
+	DefaultListModel ListaMod1 = new DefaultListModel();
+	DefaultListModel ListaMod2 = new DefaultListModel();
 
 	public AltaPremioForm(final Sistema sistema) {
 		super();
-		initGUI();
 		this.sistema = sistema;
-		
+		initGUI();
 	}
 
 	public void initGUI() {
@@ -49,53 +54,32 @@ public class AltaPremioForm extends JPanel {
 		setLayout(null);
 
 		JLabel lblnroMaquina = new JLabel("Nro Tragamonedas");
-		lblnroMaquina.setBounds(12, 30, 202, 15);
+		lblnroMaquina.setBounds(80, 30, 202, 15);
 		add(lblnroMaquina);
-
+		
 		JLabel lblvalorPremio = new JLabel("Valor del Premio");
-		lblvalorPremio.setBounds(220, 30, 202, 15);
+		lblvalorPremio.setBounds(100, 250, 202, 15);
 		add(lblvalorPremio);
-
-		combinacionText = new JTextArea();
-		combinacionText.setBounds(80,70,300,100);
-//			Deshabilitamos para que solo puedan cargarse frutas con los botones
-		combinacionText.setEnabled(false);
-		add(combinacionText);
-
+		
+		ListadoFrutas = new JList();
+		ListadoFrutas.setBounds(80,70,100,140);
+		ListadoFrutas.setEnabled(true);
+		add(ListadoFrutas);
+		
+		ListadoCasillas = new JList();
+		ListadoCasillas.setBounds(270,70,100,140);
+		ListadoCasillas.setEnabled(true);
+		add(ListadoCasillas);
+		
 		valorPremioText = new JTextField();
-		valorPremioText.setBounds(324, 28, 114, 19);
+		valorPremioText.setBounds(200,250, 114, 19);
 		add(valorPremioText);
 		valorPremioText.setColumns(10);
 
 		nroMaquinaText = new JTextField();
-		nroMaquinaText.setBounds(140, 28, 20, 19);
+		nroMaquinaText.setBounds(220, 28, 20, 19);
 		add(nroMaquinaText);
 		nroMaquinaText.setColumns(10);
-
-		btnBanana = new JButton("Banana");
-		//btnBanana.setIcon(new javax.swing.ImageIcon("banana.jpg")); 
-		btnBanana.setBounds(10, 200, 80, 25);
-		add(btnBanana);
-
-		btnFrutilla = new JButton("Frutilla");
-		//btnBanana.setIcon(new javax.swing.ImageIcon("banana.jpg"));
-		btnFrutilla.setBounds(100, 200, 80, 25);
-		add(btnFrutilla);
-
-		btnManzana = new JButton("Manzana");
-		//btnBanana.setIcon(new javax.swing.ImageIcon("banana.jpg")); 
-		btnManzana.setBounds(190, 200, 85, 25);
-		add(btnManzana);
-
-		btnPera = new JButton("Pera");
-		//btnBanana.setIcon(new javax.swing.ImageIcon("banana.jpg")); 
-		btnPera.setBounds(290, 200, 80, 25);
-		add(btnPera);
-
-		btnSandia = new JButton("Sandia");
-		//btnBanana.setIcon(new javax.swing.ImageIcon("banana.jpg")); 
-		btnSandia.setBounds(380, 200, 80, 25);
-		add(btnSandia);
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(100, 300, 117, 25);
@@ -109,6 +93,18 @@ public class AltaPremioForm extends JPanel {
 		btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.setBounds(390, 107, 89, 23);
 		add(btnLimpiar);
+		
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(270, 30, 80, 15);
+		add(btnBuscar);
+		
+		btnPoner = new JButton("Poner");
+		btnPoner.setBounds(185,100, 80, 15);
+		add(btnPoner);
+		
+		btnSacar = new JButton("Sacar");
+		btnSacar.setBounds(185,150, 80, 15);
+		add(btnSacar);
 		
 		initEvents();
 
@@ -131,12 +127,14 @@ public class AltaPremioForm extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				float valorPremio;
 				int Nromaquina;
-				List<String> combinacionPremio;
+				Vector<String> combinacionPremio = new Vector<String>();
 				try {
 					valorPremio = Float.parseFloat(valorPremioText.getText());
 					Nromaquina = Integer.parseInt(nroMaquinaText.getText());
-					String[] texto = combinacionText.getText().split("\n");
-					combinacionPremio = Arrays.asList(texto);
+					
+					for(int i=0;i<ListaMod2.size();i++){
+						combinacionPremio.addElement(ListaMod2.elementAt(i).toString());
+					}
 					
 					UserMessageView vistaRetorno = sistema.altaPremio(Nromaquina, combinacionPremio, valorPremio);
 					
@@ -144,7 +142,7 @@ public class AltaPremioForm extends JPanel {
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(null, "Ocurrio un error al dar de alta el premio, revise los datos", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				limpiar();
+//				limpiar();
 			}
 		});	
 		
@@ -152,52 +150,48 @@ public class AltaPremioForm extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				combinacionText.setText("");				
+				ListaMod2.removeAllElements();
+				ListadoCasillas.setModel(ListaMod2);		
 			}
 		});
 		
-		btnSandia.addActionListener(new ActionListener() {
+		btnBuscar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) { 
-				combinacionText.append("Sandia\n");
-				combinacionText.setLineWrap(true);
+				ListaMod1.removeAllElements();
+				ListadoFrutas.setModel(ListaMod1);
+				Listado = (Vector<Fruta>) sistema.obtenerListaFrutas();
+				for (int i =0;i<Listado.size();i++){
+					ListaMod1.addElement(Listado.get(i).getNombre());
+				}
+				ListadoFrutas.setModel(ListaMod1);
+
+			};
+		});	
+		
+		btnPoner.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) { 
+				String Seleccion = (String) ListadoFrutas.getSelectedValue();
+				ListaMod2.addElement(Seleccion);
+				ListadoCasillas.setModel(ListaMod2);
 			}
 		});	
 		
-		btnBanana.addActionListener(new ActionListener() {
+		btnSacar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
-				combinacionText.append("Banana\n");
-				combinacionText.setLineWrap(true);
+				int selec = ListadoCasillas.getSelectedIndex();
+				if (selec >= 0){
+					ListaMod2.removeElementAt(selec);
+				}
 			}
 		});	
 
-		btnFrutilla.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent arg0) {
-				combinacionText.append("Frutilla\n");
-				combinacionText.setLineWrap(true);
-			}
-		});	
-
-		btnPera.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent arg0) {
-				combinacionText.append("Pera\n");
-				combinacionText.setLineWrap(true);
-			}
-		});	
-		
-		btnManzana.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent arg0) {
-				combinacionText.append("Manzana\n");
-				combinacionText.setLineWrap(true);
-			}
-		});	
 	}
 	
 	private void limpiar() {
-		combinacionText.setText("");
+		ListaMod2.removeAllElements();
+		ListadoCasillas.setModel(ListaMod2);
 	}
 }

@@ -7,9 +7,9 @@ public class JugadaView {
 	
 	private List<Fruta> combinacion;
 	private boolean tienePremio;
-	private float premioValor;
+	private Float premioValor;
 	
-	public JugadaView(List<Fruta> combinacion, boolean tienePremio, float premioValor){
+	public JugadaView(List<Fruta> combinacion, boolean tienePremio, Float premioValor){
 		this.combinacion= combinacion;
 		this.tienePremio= tienePremio;
 		this.premioValor= premioValor;
@@ -19,10 +19,12 @@ public class JugadaView {
 	public List<Fruta> getCombinacion(){
 		return combinacion;		
 	}
+	
 	public boolean getTienePremio(){
 		return tienePremio;		
 	}
-	public float getPremioValor(){
+	
+	public Float getPremioValor(){
 		return premioValor;
 	}
 

@@ -8,8 +8,9 @@ public class JugadaConPremio extends Jugada {
 
 	private Premio premio;
 	
-	public JugadaConPremio(List<Fruta> combinacion) {
+	public JugadaConPremio(List<Fruta> combinacion, Premio premio) {
 		super(combinacion);
+		this.premio=premio;
 	}
 
 	@Override

@@ -133,22 +133,21 @@ public class Tragamonedas {
 		this.setRecaudacion(this.getRecaudacion()+this.precioJugada);
 		this.setCredito(this.getCredito()-this.getPrecioJugada());
 
-		if (this.esJugadaConPremio(combinacion))
-			return new JugadaConPremio(combinacion);
-
+		if (this.esJugadaConPremio(combinacion)){
+			this.setCredito(this.getCredito()+(this.getPremioJugada(combinacion).getValorPremio()));
+			return new JugadaConPremio(combinacion,this.getPremioJugada(combinacion));
+		}
 		return new JugadaSinPremio(combinacion);
 
 	}
 
-	private boolean esJugadaConPremio(List<Fruta> combinacion) {
+	private boolean esJugadaConPremio(List<Fruta> combinacionAEvaluar) {
 
 		for (int i = 0; i < premios.size(); i++){
 
 			Premio premio = premios.get(i);
 
-			List<Fruta> combinacionAEvaluar = premio.getCombinacion();
-
-			if (combinacion.equals(combinacionAEvaluar))
+			if (premio.tienePremio(combinacionAEvaluar))
 				return true;
 			else
 				continue;
@@ -158,6 +157,25 @@ public class Tragamonedas {
 		return false;
 	}
 
+	private Premio getPremioJugada(List<Fruta> combinacionAEvaluar) {
+        Premio premio=null;
+        
+		for (int i = 0; i < premios.size(); i++){
+
+			premio = premios.get(i);
+
+			if (premio.tienePremio(combinacionAEvaluar))
+				return premio;
+			else
+				continue;
+
+		}
+
+		return premio;
+	}
+	
+	
+	
 	private boolean buscarCombinacion(List<Fruta> combinacion){
 
 		for (int i=0;i<premios.size();i++){

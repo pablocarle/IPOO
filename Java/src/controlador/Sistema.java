@@ -6,6 +6,7 @@ import java.util.Vector;
 
 import modelo.Fruta;
 import modelo.Jugada;
+import modelo.Premio;
 import modelo.Tragamonedas;
 import vista.JugadaView;
 import vista.TragamonedasView;
@@ -263,4 +264,49 @@ public class Sistema {
 			return false;
 		}
 	}
+	public List<String> consultarPremios(Integer nbrMaquina) {
+        List<Premio> Premios;
+        List<Fruta>  Combinacion= new Vector<Fruta>();
+        List<String> listadoPremios=new Vector<String>();
+        String texto = new String();
+        
+		try {
+			Tragamonedas maquina = this.buscarTragamonedas(nbrMaquina);
+			Premios=maquina.getPremios();
+			for(int i=0;i<Premios.size();i++){
+				texto="";
+				Combinacion.addAll(Premios.get(i).getCombinacion());
+				for(int j=0;j<Combinacion.size();j++){
+					texto+= Combinacion.get(j).getNombre() + "    ";
+				}
+				Combinacion.clear();
+//				String valorPremio = String.valueOf(Premios.get(i).getValorPremio());
+//				texto += valorPremio;
+				listadoPremios.add(texto);
+			}
+			
+			return listadoPremios;
+		} catch (MaquinaNoEncontradaException e) {
+			return null;
+		}
+	}
+
+	
+	public List<String> obtenerURLFrutas(JugadaView jugada){
+		List<String> URLImagenes = new Vector<String>();
+		List<Fruta> combinacion= jugada.getCombinacion();
+		int i;
+		
+		for (i=0; i<combinacion.size();i++){
+			String urlFruta = combinacion.get(i).getUrlImagen();
+			URLImagenes.add(urlFruta);
+		}
+			
+	
+		return URLImagenes;
+		
+	}
+	
+
+	
 }

@@ -1,8 +1,11 @@
 package vista.juego;
 
+import java.util.List;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,18 +25,24 @@ public class JuegoMain extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private JPanel contentPane;
+	//private JPanel contentPane;
 
 	private JTextField txtCreditoActual;
 	private JTextField txtCreditoACargar;
 	private JTextField txtTragamonedasNbr;
 	private JTextField txtPrecioJugada;
+	private List<ImageIcon> imagenesFrutas;
 	
 	private JButton btnBuscar;
 	private JButton btnSalir;
 	private JButton btnIncrementarCredito;
 	private JButton btnJugar;
 	private JButton btnCobrarCredito;
+	
+	private JLabel lblImagen0;
+	private JLabel lblImagen1;
+	private JLabel lblImagen2;
+	private JLabel lblImagen3;
 	
 	private Sistema sistema;
 	
@@ -46,9 +55,9 @@ public class JuegoMain extends JFrame {
 //		Ubicacion y tamaño de la ventana (JFrame) de configuracion, esta ventana
 		setBounds(100, 100, 707, 524);
 
-		contentPane = new JPanel();
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		//contentPane = new JPanel();
+		//setContentPane(contentPane);
+		getContentPane().setLayout(null);
 
 		setResizable(false);
 
@@ -88,6 +97,22 @@ public class JuegoMain extends JFrame {
         //--------------------------------
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(15, 61, 649, 2);
+
+		lblImagen0 = new JLabel("");
+		lblImagen0.setBounds(10, 73, 144, 141);
+		getContentPane().add(lblImagen0);
+
+		lblImagen1 = new JLabel("");
+		lblImagen1.setBounds(164, 73, 144, 141);
+		getContentPane().add(lblImagen1);
+
+		lblImagen2 = new JLabel("");
+		lblImagen2.setBounds(318, 73, 131, 141);
+		getContentPane().add(lblImagen2);
+
+		lblImagen3 = new JLabel("");
+		lblImagen3.setBounds(459, 74, 131, 140);
+		getContentPane().add(lblImagen3);
 		
 		
         //--------------------------------
@@ -135,25 +160,26 @@ public class JuegoMain extends JFrame {
 
 
 		//Agrega objetos a la ventana
-		contentPane.add(lblMaquina);
-		contentPane.add(txtTragamonedasNbr);
-		contentPane.add(lblCreditoActual);
-		contentPane.add(txtCreditoActual);
+		getContentPane().add(lblMaquina);
+		getContentPane().add(txtTragamonedasNbr);
+		getContentPane().add(lblCreditoActual);
+		getContentPane().add(txtCreditoActual);
 
-		contentPane.add(separator_1);
-		contentPane.add(btnJugar);
-		contentPane.add(btnCobrarCredito);
-		contentPane.add(btnSalir);
+		getContentPane().add(separator_1);
+		getContentPane().add(btnJugar);
+		getContentPane().add(btnCobrarCredito);
+		getContentPane().add(btnSalir);
 
-		contentPane.add(separator);
-		contentPane.add(lblCredito);
-		contentPane.add(txtCreditoACargar);
-		contentPane.add(btnIncrementarCredito);
+		getContentPane().add(separator);
+		getContentPane().add(lblCredito);
+		getContentPane().add(txtCreditoACargar);
+		getContentPane().add(btnIncrementarCredito);
 		
-		contentPane.add(btnBuscar);
+		getContentPane().add(btnBuscar);
 		
-		contentPane.add(lblPrecioJugada);
-		contentPane.add(txtPrecioJugada);
+		getContentPane().add(lblPrecioJugada);
+		getContentPane().add(txtPrecioJugada);
+		
 
 		
 		
@@ -190,8 +216,7 @@ public class JuegoMain extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 //				Cerrar la ventana y volver al menu principal
-				JFrame configFrame = (JFrame)getParent().getParent();//.getParent().getParent();
-				configFrame.dispose();
+				dispose();
 				JFrame mainPage = new MainFrame(sistema);
 				mainPage.setVisible(true);
 				
@@ -257,12 +282,16 @@ public class JuegoMain extends JFrame {
 							nbrMaquina = Integer.parseInt(txtTragamonedasNbr.getText());
 							try {
 								JugadaView jugada= sistema.jugarConMaquina(nbrMaquina);
+								List<String> urlImagenes= sistema.obtenerURLFrutas(jugada);
+								imagenesFrutas= actualizarFrutas(urlImagenes);
+								mostrarFrutas(imagenesFrutas);
+								
 								//Confirmacion de premio
 								if (jugada.getTienePremio()){
-									int seguro =JOptionPane.showConfirmDialog(null, "Confirmar premio"); 
-									if (seguro == 0){
+									JOptionPane.showMessageDialog(null, "Confirmar premio "+jugada.getPremioValor().toString()); 
+									/*if (seguro == 0){
 		 							    JOptionPane.showMessageDialog(null, "Jugada con premio");
-									}
+									}*/
 								}else{
 	 							    JOptionPane.showMessageDialog(null, "Jugada sin premio");
 								}
@@ -281,8 +310,49 @@ public class JuegoMain extends JFrame {
 					}
 
 			}
+
 		});
 	
 	
 	}
+	private List<ImageIcon> actualizarFrutas(List<String> urlImagenes) {
+		List<ImageIcon> nuevaLista= new Vector<ImageIcon>();
+		int i;
+		
+		for (i=0; i<urlImagenes.size();i++){
+			nuevaLista.add(new ImageIcon(urlImagenes.get(i)));
+		}
+		return nuevaLista;
+	}
+	
+	private void mostrarFrutas(List<ImageIcon> imagenesFrutas){
+		int i;
+		
+
+		for (i=0; i<imagenesFrutas.size();i++){
+			switch (i){
+			case 0:
+				lblImagen0.setIcon(imagenesFrutas.get(i));
+				break;
+			case 1:
+				lblImagen1.setIcon(imagenesFrutas.get(i));
+				break;
+			case 2:
+				lblImagen2.setIcon(imagenesFrutas.get(i));
+				break;
+			case 3:
+				lblImagen3.setIcon(imagenesFrutas.get(i));
+				break;
+			default :
+				//label
+				break;		   
+			}
+		}
+		
+		
+	}
+	
+
+
+
 }

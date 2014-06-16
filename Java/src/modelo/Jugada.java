@@ -15,7 +15,7 @@ public abstract class Jugada {
 	public List<Fruta> getCombinacion(){
 		return combinacion;
 	}
-
+	
 	public abstract boolean tienePremio();
 
 	public abstract float getPremioValor();

@@ -25,4 +25,23 @@ public class Premio {
 	public List<Fruta> getCombinacion() {
 		return combinacion;
 	}
+	
+	public boolean tienePremio(List<Fruta> combinacionAEvaluar) {
+		boolean validacion=true;
+
+		for (int i = 0; i < combinacionAEvaluar.size(); i++){
+
+			Fruta frutaEvaluar = combinacionAEvaluar.get(i);
+			Fruta frutaCombinacion = this.combinacion.get(i);
+
+			if (frutaCombinacion.esFrutaIgual(frutaEvaluar))
+				continue;
+			else
+				return false;
+
+		}
+
+		return validacion;
+	}
+	
 }

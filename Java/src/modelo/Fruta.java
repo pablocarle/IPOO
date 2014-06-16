@@ -71,4 +71,11 @@ public class Fruta {
 	public void setUrlImagen(String urlImagen) {
 		this.urlImagen = urlImagen;
 	}
+	
+	public boolean esFrutaIgual(Fruta frutaEvaluar){
+		
+		return this.nombre==frutaEvaluar.getNombre();
+		
+	}
+	
 }
