@@ -289,13 +289,12 @@ public class JuegoMain extends JFrame {
 								//Confirmacion de premio
 								if (jugada.getTienePremio()){
 									JOptionPane.showMessageDialog(null, "Confirmar premio "+jugada.getPremioValor().toString()); 
-									/*if (seguro == 0){
-		 							    JOptionPane.showMessageDialog(null, "Jugada con premio");
-									}*/
-								}else{
-	 							    JOptionPane.showMessageDialog(null, "Jugada sin premio");
 								}
 								txtCreditoActual.setText(sistema.obtenerCredito(nbrMaquina).toString()   );
+								UserMessageView mensaje = sistema.validarEstadoMaquina(nbrMaquina);
+								if (mensaje!=null){
+									JOptionPane.showMessageDialog(null,mensaje.getMensaje());
+								}
 							} catch (TragamonedasException ey) {
 								JOptionPane.showMessageDialog(null,ey.getMessage());
 							}

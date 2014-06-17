@@ -1,11 +1,11 @@
 package modelo;
 
 import java.util.List;
-
 import java.util.Vector;
 
 import vista.JugadaView;
 import vista.TragamonedasView;
+import vista.UserMessageView;
 import controlador.exceptions.CantidadCasillasIncorrectaException;
 import controlador.exceptions.CombinacionExistenteException;
 import controlador.exceptions.PremioException;
@@ -117,9 +117,12 @@ public class Tragamonedas {
 
 		return new JugadaView(combinacionDummy, tienePremioDummy, premioValorDummy);
 	
-	}	
+	}
+	/*
+	 * Metodo para jugar con la maquina
+	 */
 
-	public Jugada jugar() {
+	private Jugada jugar() throws TragamonedasException {
 
 		List<Fruta> combinacion = new Vector<Fruta>();
 
@@ -130,11 +133,21 @@ public class Tragamonedas {
 			combinacion.add(fruta);
 
 		}
-		this.setRecaudacion(this.getRecaudacion()+this.precioJugada);
-		this.setCredito(this.getCredito()-this.getPrecioJugada());
+		this.incrementarRecaudacion(this.getPrecioJugada());
+		this.disminuirCredito(this.getPrecioJugada());
 
+		//Metodo que devuelve true o false se es una jugada con premio
 		if (this.esJugadaConPremio(combinacion)){
-			this.setCredito(this.getCredito()+(this.getPremioJugada(combinacion).getValorPremio()));
+			
+			//Verificar si se puede pagar el premio
+			try {
+				if (this.sePuedePagar(this.getPremioJugada(combinacion).getValorPremio())){
+					this.disminuirRecaudacion(this.getPremioJugada(combinacion).getValorPremio());
+					this.incrementarCredito(this.getPremioJugada(combinacion).getValorPremio());
+				}
+			} catch (TragamonedasException e){
+				throw new TragamonedasException(e.getMessage());			
+			}
 			return new JugadaConPremio(combinacion,this.getPremioJugada(combinacion));
 		}
 		return new JugadaSinPremio(combinacion);
@@ -195,13 +208,6 @@ public class Tragamonedas {
 		return null;
 	}
 
-	public void incrementarCredito(Float creditoAdicional) {
-		credito += creditoAdicional;
-	}
-	
-	public void cobrarCredito(){
-		credito = 0;
-	}
 
 	/*GETTERS Y SETTERS*/
 
@@ -274,6 +280,10 @@ public class Tragamonedas {
 		casillas.add(posicionCasilla, nuevaCasilla);
 		
 	}
+	
+	 //------------------------------------------------------------------
+	 // Metodo que permite saber si se puede jugar 
+	 //------------------------------------------------------------------ 
 
 	private boolean sePuedeJugar() throws TragamonedasException {
         
@@ -281,26 +291,90 @@ public class Tragamonedas {
 		
 		if (this.getCredito()>=0.0){
 			if (this.getCredito()>=this.getPrecioJugada()){
-				if (this.getRecaudacion()>this.getRecaudacionMin()){
-					sePuede=true;
-				}else{
-					sePuede=false;
-					throw new TragamonedasException("Se alcanzó la recaudación minima");
-				}
-				
+			   sePuede=true;			
 			}else{
 				sePuede=false;
-				throw new TragamonedasException("El credito actual de la maquina debe ser mayor o igual al precio de la jugada ");
+				throw new TragamonedasException("El credito actual de la maquina debe ser mayor o igual al precio de la jugada, no se puede jugar por el momento. ");
 			}
 			
 		}else{
 			sePuede=false;
-			throw new TragamonedasException("El credito actual de la maquina debe ser mayor que 0");
+			throw new TragamonedasException("El credito actual de la maquina debe ser mayor que 0, no se puede jugar por el momento.");
+		}
+		return sePuede;
+
+	}
+	
+	 //------------------------------------------------------------------
+	 // Metodo que permite conocer el estado actual de la maquina 
+	 //------------------------------------------------------------------ 
+	public UserMessageView validarEstadoMaquina(){
+		UserMessageView mensaje=null;
+
+		if (this.getRecaudacion()<=this.getRecaudacionMin()){
+			mensaje = new UserMessageView("Se alcanzó la recaudación minima, es posible que no se pueda pagar los próximos premios.");
+		}	
+		
+		return mensaje;
+	}
+	
+	 //------------------------------------------------------------------
+	 // Metodo que permite saber si se puede pagar el premio 
+	 //------------------------------------------------------------------ 
+
+	private boolean sePuedePagar(Float premioEvaluar) throws TragamonedasException {
+       
+		boolean sePuede=true;
+		
+		if (this.getRecaudacion()>=premioEvaluar){
+			sePuede=true;		
+		}else{
+			sePuede=false;
+			throw new TragamonedasException("El premio a otorgar es mayor que la recaudación actual. ");
 		}
 		return sePuede;
 
 	}
 
+	/*
+	 * Metodo que permite aumentar la recaudacion
+	 */
+
+	private void incrementarRecaudacion(float recaudacionNueva) {
+		float recaudacionActual=this.getRecaudacion();
+		this.setRecaudacion(recaudacionActual+recaudacionNueva);
+	}
+
+	/*
+	 * Metodo que permite disminuir la recaudacion
+	 */
+	private void disminuirRecaudacion(float recaudacionNueva) {
+		float recaudacionActual=this.getRecaudacion();
+		this.setRecaudacion(recaudacionActual-recaudacionNueva);
+	}
+
+	/*
+	 * Metodo que permite aumentar el credito disponible 
+	 */
+	public void incrementarCredito(Float creditoAdicional) {
+		Float creditoActual=this.getCredito();
+		this.setCredito(creditoActual+creditoAdicional);
+	}
+
+	/*
+	 * Metodo que permite disminuir el credito disponible 
+	 */
+	public void disminuirCredito(Float creditoAdicional) {
+		Float creditoActual=this.getCredito();
+		this.setCredito(creditoActual-creditoAdicional);
+	}
+
+	/*
+	 * Metodo que permite cobrar el credito disponible 
+	 */
+	public void cobrarCredito(){
+		this.setCredito(0);
+	}
 	
 	
 }

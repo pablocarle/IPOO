@@ -131,18 +131,32 @@ public class Sistema {
 			
 			return jugada;
 
-			/*
-			if (jugada.getTienePremio()) {
-				throw new TragamonedasException("Jugada con Premio");
-			} else {
-				throw new TragamonedasException("Jugada sin Premio");
-			}*/
 
 		} catch (MaquinaNoEncontradaException e) {
 			throw new TragamonedasException(e.getMessage());
 		} catch (Exception e) {
 			throw new TragamonedasException(e.getMessage());
 		}	
+	}
+	
+	/*
+	 * Metodo para validar el estado actual de un tragamonedas
+	 */
+	public UserMessageView validarEstadoMaquina(int nroMaquina){
+		UserMessageView mensaje=null;
+		
+		try {
+			Tragamonedas maquina = this.buscarTragamonedas(nroMaquina);
+
+			mensaje = maquina.validarEstadoMaquina();
+			
+		} catch (MaquinaNoEncontradaException e) {
+			mensaje= new UserMessageView(e.getMessage());
+		} catch (Exception e) {
+			mensaje= new UserMessageView(e.getMessage());
+		}	
+		
+		return mensaje;
 	}
 
 	/**
