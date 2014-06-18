@@ -273,6 +273,12 @@ public class Tragamonedas {
 	public List<Casilla> getCasillas() {
 		return casillas;
 	}
+	
+	public List<Fruta> getCombinacionJugada(JugadaView jugada){
+		List<Fruta> combinacion= jugada.getCombinacion();
+		
+		return combinacion;
+	}
 
 	public void cargarCasilla(int posicionCasilla, List<Fruta> frutas) {
 		

@@ -306,9 +306,10 @@ public class Sistema {
 	}
 
 	
-	public List<String> obtenerURLFrutas(JugadaView jugada){
+	public List<String> obtenerURLFrutas(Integer nbrMaquina, JugadaView jugada) throws MaquinaNoEncontradaException{
 		List<String> URLImagenes = new Vector<String>();
-		List<Fruta> combinacion= jugada.getCombinacion();
+		Tragamonedas maquina = this.buscarTragamonedas(nbrMaquina);
+		List<Fruta> combinacion= maquina.getCombinacionJugada(jugada);
 		int i;
 		
 		for (i=0; i<combinacion.size();i++){

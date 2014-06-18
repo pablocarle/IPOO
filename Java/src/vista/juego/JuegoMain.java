@@ -268,7 +268,7 @@ public class JuegoMain extends JFrame {
 		});
 
 		//-----------------------------------------------------------------
-		// El jugar debiera devolver la combinacion y el premio no ??
+		// Boton jugar
 		//-----------------------------------------------------------------
 		btnJugar.addActionListener(new ActionListener() {
 			
@@ -282,7 +282,7 @@ public class JuegoMain extends JFrame {
 							nbrMaquina = Integer.parseInt(txtTragamonedasNbr.getText());
 							try {
 								JugadaView jugada= sistema.jugarConMaquina(nbrMaquina);
-								List<String> urlImagenes= sistema.obtenerURLFrutas(jugada);
+								List<String> urlImagenes= sistema.obtenerURLFrutas(nbrMaquina, jugada);
 								imagenesFrutas= actualizarFrutas(urlImagenes);
 								mostrarFrutas(imagenesFrutas);
 								
