@@ -1,18 +1,17 @@
 package vista.juego;
 
-import java.util.List;
-import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.JSeparator;
-import javax.swing.JButton;
+import javax.swing.JTextField;
 
 import vista.JugadaView;
 import vista.MainFrame;
@@ -43,6 +42,12 @@ public class JuegoMain extends JFrame {
 	private JLabel lblImagen1;
 	private JLabel lblImagen2;
 	private JLabel lblImagen3;
+	private JLabel lblImagen4;
+	private JLabel lblImagen5;
+	private JLabel lblImagen6;
+	private JLabel lblImagen7;
+	private JLabel lblImagen8;
+	private JLabel lblImagen9;
 	
 	private Sistema sistema;
 	
@@ -111,9 +116,32 @@ public class JuegoMain extends JFrame {
 		getContentPane().add(lblImagen2);
 
 		lblImagen3 = new JLabel("");
-		lblImagen3.setBounds(459, 74, 131, 140);
+		lblImagen3.setBounds(459, 73, 131, 140);
 		getContentPane().add(lblImagen3);
 		
+		lblImagen4 = new JLabel("");
+		lblImagen4.setBounds(600, 73, 131, 140);
+		getContentPane().add(lblImagen4);
+		
+		lblImagen5 = new JLabel("");
+		lblImagen5.setBounds(741, 73, 131, 140);
+		getContentPane().add(lblImagen5);
+		
+		lblImagen6 = new JLabel("");
+		lblImagen6.setBounds(882, 73, 131, 140);
+		getContentPane().add(lblImagen6);
+		
+		lblImagen7 = new JLabel("");
+		lblImagen7.setBounds(1023, 73, 131, 140);
+		getContentPane().add(lblImagen7);
+		
+		lblImagen8 = new JLabel("");
+		lblImagen8.setBounds(1164, 73, 131, 140);
+		getContentPane().add(lblImagen8);
+		
+		lblImagen9 = new JLabel("");
+		lblImagen9.setBounds(1305, 73, 131, 140);
+		getContentPane().add(lblImagen9);
 		
         //--------------------------------
 		//Botones de juego, Cobrar credito y Salir
@@ -201,6 +229,7 @@ public class JuegoMain extends JFrame {
 					btnIncrementarCredito.setEnabled(true);
 					btnCobrarCredito.setEnabled(true);
 					btnJugar.setEnabled(true);
+					btnBuscar.setEnabled(false);
 					
 				} catch (NumberFormatException ex) {
 					JOptionPane.showMessageDialog(null, "Ocurrio un error de carga de credito adiciona, revise los datos ingresados");
@@ -341,6 +370,24 @@ public class JuegoMain extends JFrame {
 				break;
 			case 3:
 				lblImagen3.setIcon(imagenesFrutas.get(i));
+				break;
+			case 4:
+				lblImagen4.setIcon(imagenesFrutas.get(i));
+				break;
+			case 5:
+				lblImagen5.setIcon(imagenesFrutas.get(i));
+				break;
+			case 6:
+				lblImagen6.setIcon(imagenesFrutas.get(i));
+				break;
+			case 7:
+				lblImagen7.setIcon(imagenesFrutas.get(i));
+				break;
+			case 8:
+				lblImagen8.setIcon(imagenesFrutas.get(i));
+				break;
+			case 9:
+				lblImagen9.setIcon(imagenesFrutas.get(i));
 				break;
 			default :
 				//label

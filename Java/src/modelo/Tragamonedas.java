@@ -68,7 +68,7 @@ public class Tragamonedas {
 			} else if (combinacion.size() == cantCasillas) {
 				premios.add(new Premio(combinacion, valorPremio));
 			} else
-				throw new CantidadCasillasIncorrectaException();
+				throw new CantidadCasillasIncorrectaException("Cantidad de frutas incorrecta");
 		}
 
 	/**

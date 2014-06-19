@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Vector;
 
 import modelo.Fruta;
-import modelo.Jugada;
 import modelo.Premio;
 import modelo.Tragamonedas;
 import vista.JugadaView;
@@ -113,7 +112,7 @@ public class Sistema {
 			if (e instanceof CombinacionExistenteException)
 				return new UserMessageView("La combinacion ingresada ya Existe");
 			else
-				return new UserMessageView("Cantidad de frutas excede el limite de la maquina");
+				return new UserMessageView(e.getMessage());
 		}
 		
 		return new UserMessageView("Premio creado exitosamente");
